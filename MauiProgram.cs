@@ -1,4 +1,7 @@
-﻿namespace FictionMobile;
+﻿using FictionMobile.MVVM.ViewModels;
+using FictionMobile.MVVM.Views;
+
+namespace FictionMobile;
 
 public static class MauiProgram
 {
@@ -13,6 +16,15 @@ public static class MauiProgram
 				fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
 			});
 
-		return builder.Build();
+		builder.Services.AddTransient<LoginView>();
+        builder.Services.AddTransient<LoginViewModel>();
+
+        builder.Services.AddSingleton<MainView>();
+        builder.Services.AddSingleton<MainViewModel>();
+
+        builder.Services.AddScoped<StoriesView>();
+        builder.Services.AddScoped<StoriesViewModel>();
+
+        return builder.Build();
 	}
 }
