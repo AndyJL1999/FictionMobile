@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="FictionMobile.MVVM.Views.LoginView"
+             Title="LoginView"
+             Shell.NavBarIsVisible="False">
+
+    <Grid RowDefinitions=".1*,.9*">
+        <RoundRectangle BackgroundColor="AliceBlue"/>
+        <Label Text="{Binding Title}"
+               TextColor="Black"
+               StyleClass="HeaderTitle"
+               FontSize="Title" 
+               VerticalOptions="Center"
+               HorizontalOptions="Center"
+               FontAttributes="Bold"/>
+
+        <Grid Grid.Row="1">
+            <RoundRectangle CornerRadius="30,30,0,0" Fill="#272537" BackgroundColor="AliceBlue" Margin="-5,0"/>
+            <VerticalStackLayout Margin="25" IsVisible="{Binding LoginFormVisible}">
+                <Label Text="Welcome!" HorizontalOptions="Center" FontSize="Title"/>
+                <Label Text="Sign in to continue" HorizontalOptions="Center" FontSize="Subtitle"/>
+
+                <Label Text="Email" Margin="0,15,0,0" FontSize="Subtitle"/>
+                <Frame StyleClass="StartUpForm">
+                    <Entry Placeholder="email@email.com" VerticalOptions="Center" HorizontalOptions="FillAndExpand"
+                           Margin="20,0" HorizontalTextAlignment="Start" Keyboard="Email"/>
+                </Frame>
+                
+
+                <Label Text="Password" Margin="0,15,0,0" FontSize="Subtitle"/>
+                <Frame StyleClass="StartUpForm">
+                    <Entry Placeholder="Password" VerticalOptions="Center" HorizontalOptions="FillAndExpand"
+                           Margin="20,0"/>
+                </Frame>
+
+                <Button Text="Login" Margin="0,30,0,0" FontAttributes="Bold" CornerRadius="30" WidthRequest="200"
+                        Command="{Binding GoToMainViewCommand}"/>
+
+                <Label Text="Sign Up" TextColor="AliceBlue" FontAttributes="Bold" HorizontalOptions="CenterAndExpand"
+                       Margin="0,60,0,0">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding SwitchFormsCommand}"/>
+                    </Label.GestureRecognizers>
+                </Label>
+            </VerticalStackLayout>
+            <VerticalStackLayout Margin="25" IsVisible="{Binding SignUpFormVisible}">
+                <Label Text="Welcome!" HorizontalOptions="Center" FontSize="Title"/>
+                <Label Text="Register here" HorizontalOptions="Center" FontSize="Subtitle"/>
+
+                <Label Text="Username" Margin="0,15,0,0" FontSize="Subtitle"/>
+                <Frame StyleClass="StartUpForm">
+                    <Entry Placeholder="Username" VerticalOptions="Center" HorizontalOptions="FillAndExpand"
+                           Margin="20,0" HorizontalTextAlignment="Start"/>
+                </Frame>
+
+                <Label Text="Email" Margin="0,15,0,0" FontSize="Subtitle"/>
+                <Frame StyleClass="StartUpForm">
+                    <Entry Placeholder="email@email.com" VerticalOptions="Center" HorizontalOptions="FillAndExpand"
+                           Margin="20,0" HorizontalTextAlignment="Start" Keyboard="Email"/>
+                </Frame>
+
+
+                <Label Text="Password" Margin="0,15,0,0" FontSize="Subtitle"/>
+                <Frame StyleClass="StartUpForm">
+                    <Entry Placeholder="Password" VerticalOptions="Center" HorizontalOptions="FillAndExpand"
+                           Margin="20,0" />
+                </Frame>
+
+                <Button Text="Register" Margin="0,30,0,0" FontAttributes="Bold" CornerRadius="30" WidthRequest="200"/>
+
+                <Label Text="Login" TextColor="AliceBlue" FontAttributes="Bold" HorizontalOptions="CenterAndExpand"
+                       Margin="0,60,0,0">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding SwitchFormsCommand}"/>
+                    </Label.GestureRecognizers>
+                </Label>
+            </VerticalStackLayout>
+        </Grid>
+        
+    </Grid>
+</ContentPage>
