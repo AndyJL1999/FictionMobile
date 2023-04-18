@@ -1,5 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using FictionMobile.MVVM.Models;
+using FictionMobile.MVVM.Views;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -13,12 +15,20 @@ namespace FictionMobile.MVVM.ViewModels
     {
         [ObservableProperty]
         private ObservableCollection<StoryDisplayModel> _stories;
+        [ObservableProperty]
+        private StoryDisplayModel _selectedStory;
 
         //TODO - Make a reading page accessable from this page
 
         public StoriesViewModel()
         {
             Fill();
+        }
+
+        [RelayCommand]
+        private async void GoToRead()
+        {
+            await Shell.Current.GoToAsync(nameof(ReadingView));
         }
 
         private void Fill()
@@ -37,5 +47,6 @@ namespace FictionMobile.MVVM.ViewModels
                 }
             };
         }
+
     }
 }

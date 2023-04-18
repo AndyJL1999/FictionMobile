@@ -13,4 +13,5 @@ public partial class StoriesView : ContentPage
 
 		BindingContext = viewModel;
 	}
+
 }
