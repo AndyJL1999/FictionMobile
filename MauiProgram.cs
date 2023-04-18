@@ -25,6 +25,12 @@ public static class MauiProgram
         builder.Services.AddScoped<StoriesView>();
         builder.Services.AddScoped<StoriesViewModel>();
 
+        builder.Services.AddScoped<ReadingView>();
+		builder.Services.AddScoped<ReadingViewModel>();
+
+		builder.Services.AddScoped<AccountView>();
+        builder.Services.AddScoped<AccountViewModel>();
+
         return builder.Build();
 	}
 }

@@ -12,13 +12,6 @@
             <Label StyleClass="HeaderSubTitle" Text="User"/>
         </VerticalStackLayout>
 
-        <Button Command="{Binding LogOutCommand}"
-                Grid.ColumnSpan="2"
-                VerticalOptions="End"
-                HorizontalOptions="CenterAndExpand"
-                Margin="10"
-                Text="Log Out"/>
-
         <Grid ColumnDefinitions="*,*" RowDefinitions="*,*" Grid.Row="1" Grid.ColumnSpan="2">
             <RoundRectangle CornerRadius="30,30,0,0" Fill="#272537" Margin="-5,0" 
                             Grid.ColumnSpan="2"
@@ -43,6 +36,10 @@
             </Grid>
 
             <Grid RowDefinitions=".7*,.3*" Grid.Row="1">
+                <Grid.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding GoToAccountCommand}"/>
+                </Grid.GestureRecognizers>
+                
                 <Image Source="account_icon" HeightRequest="100" WidthRequest="100"
                        Margin="0,50,0,0"/>
                 <Label Grid.Row="1" Text="Account" HorizontalOptions="Center"

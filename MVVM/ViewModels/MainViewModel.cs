@@ -25,9 +25,10 @@ namespace FictionMobile.MVVM.ViewModels
         }
 
         [RelayCommand]
-        private async Task LogOut()
+        private async Task GoToAccount()
         {
-            await Shell.Current.GoToAsync($"//{nameof(LoginView)}");
+            await Shell.Current.GoToAsync(nameof(AccountView));
         }
+
     }
 }
