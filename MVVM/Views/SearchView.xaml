@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="FictionMobile.MVVM.Views.SearchView"
+             Title="Search">
+
+    <Shell.BackButtonBehavior>
+        <BackButtonBehavior Command="{Binding ReturnToMainCommand}"
+                            />
+    </Shell.BackButtonBehavior>
+    
+    <Grid BackgroundColor="#272537" RowDefinitions=".2*,.8*">
+        
+        <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Spacing="10">
+            
+            <Label Text="Browse" FontSize="Subtitle" FontAttributes="Bold"
+                   VerticalOptions="Center" HorizontalOptions="Center"/>
+            <Button Text="..." HeightRequest="35" WidthRequest="40"
+                    Command="{Binding SearchForFileCommand}"/>
+            
+        </StackLayout>
+        
+        <VerticalStackLayout Grid.Row="1" Spacing="5" Margin="15">
+            <Label Text="Your Story" HorizontalOptions="Center"
+                   FontSize="Title" Margin="0,0,0,15"
+                   FontAttributes="Bold"/>
+
+            <TableView Intent="Data">
+                <TableRoot>
+                    <TableSection>
+                        <TextCell  Text="Title:"
+                                   TextColor="AliceBlue"
+                                   DetailColor="LimeGreen"
+                                   Detail="{Binding Story.Title}"/>
+                        <TextCell  Text="Author:"
+                                   TextColor="AliceBlue"
+                                   DetailColor="LimeGreen"
+                                   Detail="{Binding Story.Author}"/>
+                        <TextCell  Text="Chapters:"
+                                   TextColor="AliceBlue"
+                                   DetailColor="LimeGreen"
+                                   Detail="{Binding Story.Chapters}"/>
+                        <TextCell  Text="Summary:"
+                                   TextColor="AliceBlue"
+                                   DetailColor="LimeGreen"
+                                   Detail="Unavailable"/>
+                    </TableSection>
+                </TableRoot>
+            </TableView>
+          
+
+            <Button Text="Save" BackgroundColor="LimeGreen"
+                    TextColor="AliceBlue" Margin="0,25,0,0"
+                    HeightRequest="50" WidthRequest="100"/>
+        </VerticalStackLayout>
+    </Grid>
+</ContentPage>

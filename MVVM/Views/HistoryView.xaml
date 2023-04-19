@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:FictionMobile.MVVM.ViewModels"
+             x:Class="FictionMobile.MVVM.Views.HistoryView"
+             Title="History">
+
+    <Grid BackgroundColor="#272537">
+
+        <CollectionView ItemsSource="{Binding StoriesRead}"
+                        SelectionMode="Single">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Frame BorderColor="AliceBlue" BackgroundColor="Transparent" MaximumHeightRequest="200">
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding Source={RelativeSource 
+                                                                    AncestorType={x:Type vm:HistoryViewModel}}, 
+                                                                    Path=GoToReadCommand}"
+                                                  CommandParameter="{Binding}"/>
+                        </Frame.GestureRecognizers>
+
+                        <VerticalStackLayout Margin="5" VerticalOptions="Start">
+                            <Label Text="{Binding Title}" FontSize="Title" FontAttributes="Bold"/>
+                            <Label StyleClass="HeaderSubTitle" Text="{Binding Author}"/>
+                            <Label MaxLines="4"
+                                   Text="Viverra suspendisse potenti nullam ac tortor. Cursus metus aliquam eleifend mi in nulla posuere. Nec nam aliquam sem et tortor. Facilisi nullam vehicula ipsum a arcu cursus. Aliquet nibh praesent tristique magna sit amet purus gravida. Diam in arcu cursus euismod quis. Elit eget gravida cum sociis natoque. Massa placerat duis ultricies lacus sed."/>
+                        </VerticalStackLayout>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+    </Grid>
+</ContentPage>
