@@ -29,9 +29,13 @@
             </Grid>
 
             <Grid RowDefinitions=".7*,.3*" Grid.Column="1">
+                <Grid.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding GoToHistoryCommand}"/>
+                </Grid.GestureRecognizers>
+                
                 <Image Source="color_shelf" HeightRequest="100" WidthRequest="100"
                        Margin="0,50,0,0"/>
-                <Label Grid.Row="1" Text="Library" HorizontalOptions="Center"
+                <Label Grid.Row="1" Text="History" HorizontalOptions="Center"
                        FontSize="Title" />
             </Grid>
 
@@ -47,6 +51,10 @@
             </Grid>
 
             <Grid RowDefinitions=".7*,.3*" Grid.Row="1" Grid.Column="1">
+                <Grid.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding GoToSearchCommand}"/>
+                </Grid.GestureRecognizers>
+                
                 <Image Source="search_icon" HeightRequest="100" WidthRequest="100"
                        Margin="0,50,0,0"/>
                 <Label Grid.Row="1" Text="Search" HorizontalOptions="Center"

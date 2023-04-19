@@ -15,10 +15,6 @@ namespace FictionMobile.MVVM.ViewModels
     {
         [ObservableProperty]
         private ObservableCollection<StoryDisplayModel> _stories;
-        [ObservableProperty]
-        private StoryDisplayModel _selectedStory;
-
-        //TODO - Make a reading page accessable from this page
 
         public StoriesViewModel()
         {
@@ -26,9 +22,15 @@ namespace FictionMobile.MVVM.ViewModels
         }
 
         [RelayCommand]
-        private async void GoToRead()
+        private async void GoToRead(StoryDisplayModel story)
         {
-            await Shell.Current.GoToAsync(nameof(ReadingView));
+            if (story is null)
+                return;
+
+            await Shell.Current.GoToAsync(nameof(ReadingView), true, new Dictionary<string, object>
+            {
+                { "SelectedStory", story }
+            });
         }
 
         private void Fill()
@@ -44,6 +46,16 @@ namespace FictionMobile.MVVM.ViewModels
                     UserId = 1,
                     EpubFile = "",
                     Id = 12034
+                },
+                new StoryDisplayModel
+                {
+                    Title = "Harry Potter and the Conjoining Paragons",
+                    Author = "J.K. Dumbdum",
+                    Chapters = "8",
+                    Summary = "This is the summary.",
+                    UserId = 1,
+                    EpubFile = "",
+                    Id = 12024
                 }
             };
         }

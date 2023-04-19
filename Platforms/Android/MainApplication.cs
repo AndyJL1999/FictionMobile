@@ -1,5 +1,8 @@
 ﻿using Android.App;
 using Android.Runtime;
+using System.Reflection;
+
+[assembly: UsesPermission(Android.Manifest.Permission.ReadExternalStorage)]
 
 namespace FictionMobile;
 

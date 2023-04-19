@@ -1,12 +1,22 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:FictionMobile.MVVM.ViewModels"
              x:Class="FictionMobile.MVVM.Views.ReadingView"
-             Title="ReadingView">
+             Title="Reading">
 
-    <WebView>
-        <WebView.Source>
-            <HtmlWebViewSource Html="{Binding StoryHtml}"/>
-        </WebView.Source>
-    </WebView>
+    <Grid RowDefinitions=".08*,.92*" >
+        
+        <VerticalStackLayout StyleClass="Header" VerticalOptions="Start">
+            <Label Text="{Binding StoryInfo.Title}" FontSize="Header"/>
+            <Label Text="{Binding StoryInfo.Author}" FontSize="Micro"/>
+        </VerticalStackLayout>
+
+        <!--<WebView Grid.Row="1">
+            <WebView.Source>
+                <HtmlWebViewSource Html="{Binding StoryHtml}"/>
+            </WebView.Source>
+        </WebView>-->
+    </Grid>
+    
 </ContentPage>

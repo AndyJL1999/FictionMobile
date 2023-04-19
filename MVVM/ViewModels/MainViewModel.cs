@@ -16,8 +16,6 @@ namespace FictionMobile.MVVM.ViewModels
 
         }
 
-        //TODO - Create GoTo commands for Acount, Library, and Search views
-
         [RelayCommand]
         private async Task GoToStories()
         {
@@ -30,5 +28,16 @@ namespace FictionMobile.MVVM.ViewModels
             await Shell.Current.GoToAsync(nameof(AccountView));
         }
 
+        [RelayCommand]
+        private async Task GoToSearch()
+        {
+            await Shell.Current.GoToAsync(nameof(SearchView));
+        }
+
+        [RelayCommand]
+        private async Task GoToHistory()
+        {
+            await Shell.Current.GoToAsync(nameof(HistoryView));
+        }
     }
 }
