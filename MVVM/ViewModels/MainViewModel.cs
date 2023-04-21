@@ -1,5 +1,7 @@
-﻿using CommunityToolkit.Mvvm.Input;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using FictionMobile.MVVM.Views;
+using Maui_UI_Fiction_Library.API;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,10 +12,14 @@ namespace FictionMobile.MVVM.ViewModels
 {
     public partial class MainViewModel : BaseViewModel
     {
+        [ObservableProperty]
+        private string _username;
+        private readonly IAPIHelper _apiHelper;
 
-        public MainViewModel()
+        public MainViewModel(IAPIHelper apiHelper)
         {
-
+            _apiHelper = apiHelper;
+            _username = _apiHelper.LoggedInUser.Username;
         }
 
         [RelayCommand]

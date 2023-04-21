@@ -54,12 +54,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Reference Include="FictionAPI">
-	    <HintPath>..\..\C# projects\FictionHoarder\FictionAPI\obj\Debug\net6.0-windows\FictionAPI.dll</HintPath>
-	  </Reference>
-	</ItemGroup>
-
-	<ItemGroup>
 	  <MauiXaml Update="MVVM\Views\AccountView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
@@ -85,5 +79,33 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>
+
+	<ItemGroup>
+	  <EditorConfigFiles Remove="C:\Users\andyl\Desktop\Maui projects\FictionMobile\.editorconfig" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\Maui_UI_Fiction_Library\Maui_UI_Fiction_Library.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="6.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="6.0.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<EmbeddedResource Include="appSettings.json" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Reference Include="FictionAPI">
+	    <HintPath>..\..\C# projects\FictionHoarder\FictionAPI\bin\Debug\net6.0-windows\FictionAPI.dll</HintPath>
+	  </Reference>
+	</ItemGroup>
+
+	<!-- Used for **DEBUG/TESTING** purposes **ONLY**-->
+	<PropertyGroup>
+		<AndroidHttpClientHandlerType>DangerousAndroidMessageHandler, DangerousAndroidMessageHandler</AndroidHttpClientHandlerType>
+	</PropertyGroup>
 
 </Project>

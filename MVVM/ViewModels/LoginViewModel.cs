@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using FictionMobile.MVVM.Views;
+using Maui_UI_Fiction_Library.API;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,14 +23,18 @@ namespace FictionMobile.MVVM.ViewModels
         [ObservableProperty]
         private bool _loginFormVisible;
 
+        private IAPIHelper _apiHelper;
+
         //TODO - Wire up Login and Sign up functions
 
-        public LoginViewModel()
+        public LoginViewModel(IAPIHelper apiHelper)
         {
             LoginFormVisible = true;
             SignUpFormVisible = false;
 
             Title = "LOGIN";
+
+            _apiHelper = apiHelper;
         }
 
         [RelayCommand]
@@ -47,8 +52,15 @@ namespace FictionMobile.MVVM.ViewModels
         [RelayCommand]
         private async Task GoToMainView()
         {
-            await Shell.Current.GoToAsync(nameof(MainView));
-        }
+            IsBusy = true;
 
+            var result = await _apiHelper.Authenticate(Email, Password);
+
+            await _apiHelper.GetUserInfo(result.Token);
+
+            await Shell.Current.GoToAsync(nameof(MainView));
+
+            IsBusy = false;
+        }
     }
 }

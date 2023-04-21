@@ -1,5 +1,9 @@
 ﻿using FictionMobile.MVVM.ViewModels;
 using FictionMobile.MVVM.Views;
+using Maui_UI_Fiction_Library.API;
+using Maui_UI_Fiction_Library.Models;
+using Microsoft.Extensions.Configuration;
+using System.Reflection;
 
 namespace FictionMobile;
 
@@ -36,6 +40,25 @@ public static class MauiProgram
 
         builder.Services.AddScoped<SearchView>();
         builder.Services.AddScoped<SearchViewModel>();
+
+		builder.Services.AddSingleton<IAPIHelper, APIHelper>();
+        builder.Services.AddSingleton<ILoggedInUser, LoggedInUser>();
+
+        var a = Assembly.GetExecutingAssembly();
+        using var stream = a.GetManifestResourceStream("FictionMobile.appSettings.json");
+
+        var config = new ConfigurationBuilder()
+            .AddJsonStream(stream)
+            .Build();
+
+        builder.Configuration.AddConfiguration(config);
+
+
+        //For **DEBUG/TESTING** purposes **ONLY**
+#if ANDROID && DEBUG
+        Platforms.Android.DangerousAndroidMessageHandlerEmitter.Register();
+        Platforms.Android.DangerousTrustProvider.Register();
+#endif
 
         return builder.Build();
 	}

@@ -5,6 +5,8 @@ VisualStudioVersion = 17.0.31611.283
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FictionMobile", "FictionMobile.csproj", "{483B1E22-4EBB-4978-8EEC-EB37C6A38342}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Maui_UI_Fiction_Library", "..\Maui_UI_Fiction_Library\Maui_UI_Fiction_Library.csproj", "{3FEA9918-E43D-4B85-ABEC-942D0E8BA390}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -17,6 +19,10 @@ Global
 		{483B1E22-4EBB-4978-8EEC-EB37C6A38342}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{483B1E22-4EBB-4978-8EEC-EB37C6A38342}.Release|Any CPU.Build.0 = Release|Any CPU
 		{483B1E22-4EBB-4978-8EEC-EB37C6A38342}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{3FEA9918-E43D-4B85-ABEC-942D0E8BA390}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3FEA9918-E43D-4B85-ABEC-942D0E8BA390}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3FEA9918-E43D-4B85-ABEC-942D0E8BA390}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3FEA9918-E43D-4B85-ABEC-942D0E8BA390}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
