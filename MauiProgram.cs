@@ -1,4 +1,6 @@
-﻿using FictionMobile.MVVM.ViewModels;
+﻿using AutoMapper;
+using FictionMobile.MVVM.Models;
+using FictionMobile.MVVM.ViewModels;
 using FictionMobile.MVVM.Views;
 using Maui_UI_Fiction_Library.API;
 using Maui_UI_Fiction_Library.Models;
@@ -19,6 +21,16 @@ public static class MauiProgram
 				fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
 				fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
 			});
+
+        var mapConfig = new MapperConfiguration(myConfig =>
+        {
+            myConfig.CreateMap<StoryModel, StoryDisplayModel>();
+            myConfig.CreateMap<StoryDisplayModel, StoryModel>();
+        });
+
+        var mapper = mapConfig.CreateMapper();
+
+        builder.Services.AddSingleton(mapper);
 
 		builder.Services.AddTransient<LoginView>();
         builder.Services.AddTransient<LoginViewModel>();
@@ -42,6 +54,7 @@ public static class MauiProgram
         builder.Services.AddScoped<SearchViewModel>();
 
 		builder.Services.AddSingleton<IAPIHelper, APIHelper>();
+        builder.Services.AddSingleton<IStoryEndpoint, StoryEndpoint>();
         builder.Services.AddSingleton<ILoggedInUser, LoggedInUser>();
 
         var a = Assembly.GetExecutingAssembly();
