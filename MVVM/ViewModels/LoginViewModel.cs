@@ -43,6 +43,10 @@ namespace FictionMobile.MVVM.ViewModels
             LoginFormVisible = !LoginFormVisible;
             SignUpFormVisible = !SignUpFormVisible;
 
+            Username = string.Empty;
+            Password = string.Empty;
+            Email = string.Empty;
+
             if (Title == "LOGIN")
                 Title = "REGISTER";
             else
@@ -59,6 +63,9 @@ namespace FictionMobile.MVVM.ViewModels
             await _apiHelper.GetUserInfo(result.Token);
 
             await Shell.Current.GoToAsync(nameof(MainView));
+
+            Password = string.Empty;
+            Email = string.Empty;
 
             IsBusy = false;
         }

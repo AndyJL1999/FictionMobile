@@ -1,7 +1,9 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿using AutoMapper;
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using FictionMobile.MVVM.Models;
 using FictionMobile.MVVM.Views;
+using Maui_UI_Fiction_Library.API;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -15,10 +17,15 @@ namespace FictionMobile.MVVM.ViewModels
     {
         [ObservableProperty]
         private ObservableCollection<StoryDisplayModel> _storiesRead;
+        private readonly IMapper _mapper;
+        private readonly IStoryEndpoint _storyEndpoint;
 
-        public HistoryViewModel()
+        public HistoryViewModel(IMapper mapper, IStoryEndpoint storyEndpoint)
         {
-            Fill();
+            _mapper = mapper;
+            _storyEndpoint = storyEndpoint;
+
+            FillHistory();
         }
 
         [RelayCommand]
@@ -33,31 +40,13 @@ namespace FictionMobile.MVVM.ViewModels
             });
         }
 
-        private void Fill()
+        private async void FillHistory()
         {
-            StoriesRead = new ObservableCollection<StoryDisplayModel>
-            {
-                new StoryDisplayModel
-                {
-                    Title = "Sir Artorias",
-                    Author = "NeonZangetsu",
-                    Chapters = "21",
-                    Summary = "The abysswalker.",
-                    UserId = 1,
-                    EpubFile = "",
-                    Id = 12035
-                },
-                new StoryDisplayModel
-                {
-                    Title = "Sir Ornstein",
-                    Author = "NeonZangetsu",
-                    Chapters = "24",
-                    Summary = "The dragonslayer.",
-                    UserId = 1,
-                    EpubFile = "",
-                    Id = 12036
-                }
-            };
+            var payload = await _storyEndpoint.GetUserStoryHistory();
+
+            var stories = _mapper.Map<IEnumerable<StoryDisplayModel>>(payload);
+
+            StoriesRead = new ObservableCollection<StoryDisplayModel>(stories);
         }
     }
 }

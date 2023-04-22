@@ -55,20 +55,23 @@
                 <Label Text="Username" Margin="0,15,0,0" FontSize="Subtitle"/>
                 <Frame StyleClass="StartUpForm">
                     <Entry Placeholder="Username" VerticalOptions="Center" HorizontalOptions="FillAndExpand"
-                           Margin="20,0" HorizontalTextAlignment="Start"/>
+                           Margin="20,0" HorizontalTextAlignment="Start"
+                           Text="{Binding Username}"/>
                 </Frame>
 
                 <Label Text="Email" Margin="0,15,0,0" FontSize="Subtitle"/>
                 <Frame StyleClass="StartUpForm">
                     <Entry Placeholder="email@email.com" VerticalOptions="Center" HorizontalOptions="FillAndExpand"
-                           Margin="20,0" HorizontalTextAlignment="Start" Keyboard="Email"/>
+                           Margin="20,0" HorizontalTextAlignment="Start" Keyboard="Email"
+                           Text="{Binding Email}"/>
                 </Frame>
 
 
                 <Label Text="Password" Margin="0,15,0,0" FontSize="Subtitle"/>
                 <Frame StyleClass="StartUpForm">
                     <Entry Placeholder="Password" VerticalOptions="Center" HorizontalOptions="FillAndExpand"
-                           Margin="20,0" />
+                           Margin="20,0" 
+                           Text="{Binding Password}"/>
                 </Frame>
 
                 <Button Text="Register" Margin="0,30,0,0" FontAttributes="Bold" CornerRadius="30" WidthRequest="200"/>

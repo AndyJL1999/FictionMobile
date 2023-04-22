@@ -11,7 +11,7 @@
                         SelectionMode="Single">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <Frame BorderColor="AliceBlue" BackgroundColor="Transparent" MaximumHeightRequest="200">
+                    <Frame BorderColor="AliceBlue" BackgroundColor="Transparent" MaximumHeightRequest="250">
                         <Frame.GestureRecognizers>
                             <TapGestureRecognizer Command="{Binding Source={RelativeSource 
                                                                     AncestorType={x:Type vm:StoriesViewModel}}, 
@@ -22,8 +22,8 @@
                         <VerticalStackLayout Margin="5" VerticalOptions="Start">
                             <Label Text="{Binding Title}" FontSize="Title" FontAttributes="Bold"/>
                             <Label StyleClass="Header" Text="{Binding Author}"/>
-                            <Label MaxLines="4"
-                                   Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ultrices vitae auctor eu augue ut lectus. Viverra suspendisse potenti nullam ac tortor. Cursus metus aliquam eleifend mi in nulla posuere. Nec nam aliquam sem et tortor. Facilisi nullam vehicula ipsum a arcu cursus. Aliquet nibh praesent tristique magna sit amet purus gravida. Diam in arcu cursus euismod quis. Elit eget gravida cum sociis natoque. Massa placerat duis ultricies lacus sed."/>
+                            <Label MaxLines="7"
+                                   Text="{Binding Summary}"/>
                         </VerticalStackLayout>
                     </Frame>
                 </DataTemplate>
