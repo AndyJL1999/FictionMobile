@@ -3,20 +3,40 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:vm="clr-namespace:FictionMobile.MVVM.ViewModels"
              x:Class="FictionMobile.MVVM.Views.ReadingView"
-             Title="Reading">
+             Title="Reading"
+             Shell.FlyoutBehavior="Flyout">
 
     <Grid RowDefinitions=".08*,.92*" >
-        
+
         <VerticalStackLayout StyleClass="Header" VerticalOptions="Start">
             <Label Text="{Binding StoryInfo.Title}" FontSize="Header"/>
             <Label Text="{Binding StoryInfo.Author}" FontSize="Micro"/>
         </VerticalStackLayout>
 
-        <!--<WebView Grid.Row="1">
-            <WebView.Source>
-                <HtmlWebViewSource Html="{Binding StoryHtml}"/>
-            </WebView.Source>
-        </WebView>-->
+        <CarouselView Grid.Row="1" ItemsSource="{Binding ChapterList}" Loop="False">
+            <CarouselView.ItemTemplate>
+                <DataTemplate>
+                    <ScrollView>
+                        <Grid>
+                            <WebView HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                                <WebView.Source>
+                                    <HtmlWebViewSource Html="{Binding}"/>
+                                </WebView.Source>
+                            </WebView>
+
+                        </Grid>
+                    </ScrollView>
+                </DataTemplate>
+            </CarouselView.ItemTemplate>
+
+        </CarouselView>
+
+        <ActivityIndicator Grid.RowSpan="2"
+                           Color="AliceBlue"
+                           HeightRequest="100"
+                           WidthRequest="100"
+                           IsRunning="{Binding IsBusy}"/>
+
     </Grid>
     
 </ContentPage>

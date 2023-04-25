@@ -11,42 +11,42 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FictionMobile.MVVM.ViewModels
+namespace FictionMobile.MVVM.ViewModels;
+
+public partial class HistoryViewModel : BaseViewModel
 {
-    public partial class HistoryViewModel : BaseViewModel
+    [ObservableProperty]
+    private ObservableCollection<StoryDisplayModel> _storiesRead;
+    private readonly IMapper _mapper;
+    private readonly IStoryEndpoint _storyEndpoint;
+
+    public HistoryViewModel(IMapper mapper, IStoryEndpoint storyEndpoint)
     {
-        [ObservableProperty]
-        private ObservableCollection<StoryDisplayModel> _storiesRead;
-        private readonly IMapper _mapper;
-        private readonly IStoryEndpoint _storyEndpoint;
+        _mapper = mapper;
+        _storyEndpoint = storyEndpoint;
 
-        public HistoryViewModel(IMapper mapper, IStoryEndpoint storyEndpoint)
+        FillHistory();
+    }
+
+    [RelayCommand]
+    private async void GoToRead(StoryDisplayModel story)
+    {
+        if (story is null)
+            return;
+
+        await Shell.Current.GoToAsync(nameof(ReadingView), true, new Dictionary<string, object>
         {
-            _mapper = mapper;
-            _storyEndpoint = storyEndpoint;
+            { "SelectedStory", story }
+        });
+    }
 
-            FillHistory();
-        }
+    private async void FillHistory()
+    {
+        var payload = await _storyEndpoint.GetUserStoryHistory();
 
-        [RelayCommand]
-        private async void GoToRead(StoryDisplayModel story)
-        {
-            if (story is null)
-                return;
+        var stories = _mapper.Map<IEnumerable<StoryDisplayModel>>(payload);
 
-            await Shell.Current.GoToAsync(nameof(ReadingView), true, new Dictionary<string, object>
-            {
-                { "SelectedStory", story }
-            });
-        }
-
-        private async void FillHistory()
-        {
-            var payload = await _storyEndpoint.GetUserStoryHistory();
-
-            var stories = _mapper.Map<IEnumerable<StoryDisplayModel>>(payload);
-
-            StoriesRead = new ObservableCollection<StoryDisplayModel>(stories);
-        }
+        StoriesRead = new ObservableCollection<StoryDisplayModel>(stories);
     }
 }
+

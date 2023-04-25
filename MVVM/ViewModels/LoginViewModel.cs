@@ -8,66 +8,68 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FictionMobile.MVVM.ViewModels
+namespace FictionMobile.MVVM.ViewModels;
+
+public partial class LoginViewModel : BaseViewModel
 {
-    public partial class LoginViewModel : BaseViewModel
+    [ObservableProperty]
+    private string _username;
+    [ObservableProperty]
+    private string _email;
+    [ObservableProperty]
+    private string _password;
+    [ObservableProperty]
+    private bool _signUpFormVisible;
+    [ObservableProperty]
+    private bool _loginFormVisible;
+
+    private IAPIHelper _apiHelper;
+
+    //TODO - Wire up Login and Sign up functions
+
+    public LoginViewModel(IAPIHelper apiHelper)
     {
-        [ObservableProperty]
-        private string _username;
-        [ObservableProperty]
-        private string _email;
-        [ObservableProperty]
-        private string _password;
-        [ObservableProperty]
-        private bool _signUpFormVisible;
-        [ObservableProperty]
-        private bool _loginFormVisible;
+        LoginFormVisible = true;
+        SignUpFormVisible = false;
 
-        private IAPIHelper _apiHelper;
+        Title = "LOGIN";
 
-        //TODO - Wire up Login and Sign up functions
+        _apiHelper = apiHelper;
+    }
 
-        public LoginViewModel(IAPIHelper apiHelper)
-        {
-            LoginFormVisible = true;
-            SignUpFormVisible = false;
+    [RelayCommand]
+    private void SwitchForms()
+    {
+        LoginFormVisible = !LoginFormVisible;
+        SignUpFormVisible = !SignUpFormVisible;
 
+        Username = string.Empty;
+        Password = string.Empty;
+        Email = string.Empty;
+
+        if (Title == "LOGIN")
+            Title = "REGISTER";
+        else
             Title = "LOGIN";
+    }
 
-            _apiHelper = apiHelper;
-        }
+    [RelayCommand]
+    private async Task GoToMainView()
+    {
+        IsBusy = true;
+        LoginFormVisible = false;
 
-        [RelayCommand]
-        private void SwitchForms()
-        {
-            LoginFormVisible = !LoginFormVisible;
-            SignUpFormVisible = !SignUpFormVisible;
+        var result = await _apiHelper.Authenticate(Email, Password);
 
-            Username = string.Empty;
-            Password = string.Empty;
-            Email = string.Empty;
+        await _apiHelper.GetUserInfo(result.Token);
 
-            if (Title == "LOGIN")
-                Title = "REGISTER";
-            else
-                Title = "LOGIN";
-        }
+        await Shell.Current.GoToAsync($"{nameof(MainView)}?Username={_apiHelper.LoggedInUser.Username}");
 
-        [RelayCommand]
-        private async Task GoToMainView()
-        {
-            IsBusy = true;
+        Password = string.Empty;
+        Email = string.Empty;
 
-            var result = await _apiHelper.Authenticate(Email, Password);
-
-            await _apiHelper.GetUserInfo(result.Token);
-
-            await Shell.Current.GoToAsync(nameof(MainView));
-
-            Password = string.Empty;
-            Email = string.Empty;
-
-            IsBusy = false;
-        }
+        IsBusy = false;
+        LoginFormVisible = true;
     }
 }
+

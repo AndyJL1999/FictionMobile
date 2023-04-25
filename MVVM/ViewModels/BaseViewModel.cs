@@ -5,13 +5,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FictionMobile.MVVM.ViewModels
+namespace FictionMobile.MVVM.ViewModels;
+
+public partial class BaseViewModel : ObservableObject
 {
-    public partial class BaseViewModel : ObservableObject
-    {
-        [ObservableProperty]
-        private bool _isBusy;
-        [ObservableProperty]
-        private string _title;
-    }
+    [ObservableProperty]
+    private bool _isBusy;
+    [ObservableProperty]
+    private string _title;
 }
+

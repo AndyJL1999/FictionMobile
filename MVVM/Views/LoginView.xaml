@@ -17,7 +17,7 @@
 
         <Grid Grid.Row="1">
             <RoundRectangle CornerRadius="30,30,0,0" Fill="#272537" BackgroundColor="AliceBlue" Margin="-5,0"/>
-            
+
             <VerticalStackLayout Margin="25" IsVisible="{Binding LoginFormVisible}">
                 <Label Text="Welcome!" HorizontalOptions="Center" FontSize="Title"/>
                 <Label Text="Sign in to continue" HorizontalOptions="Center" FontSize="Subtitle"/>
@@ -28,7 +28,7 @@
                            Margin="20,0" HorizontalTextAlignment="Start" Keyboard="Email"
                            Text="{Binding Email}"/>
                 </Frame>
-                
+
 
                 <Label Text="Password" Margin="0,15,0,0" FontSize="Subtitle"/>
                 <Frame StyleClass="StartUpForm">
@@ -47,7 +47,7 @@
                     </Label.GestureRecognizers>
                 </Label>
             </VerticalStackLayout>
-            
+
             <VerticalStackLayout Margin="25" IsVisible="{Binding SignUpFormVisible}">
                 <Label Text="Welcome!" HorizontalOptions="Center" FontSize="Title"/>
                 <Label Text="Register here" HorizontalOptions="Center" FontSize="Subtitle"/>
@@ -82,9 +82,16 @@
                         <TapGestureRecognizer Command="{Binding SwitchFormsCommand}"/>
                     </Label.GestureRecognizers>
                 </Label>
+                
             </VerticalStackLayout>
 
+            <ActivityIndicator Grid.RowSpan="2"
+                               Color="AliceBlue"
+                               HeightRequest="100"
+                               WidthRequest="100"
+                               IsRunning="{Binding IsBusy}"/>
+
         </Grid>
-        
+
     </Grid>
 </ContentPage>

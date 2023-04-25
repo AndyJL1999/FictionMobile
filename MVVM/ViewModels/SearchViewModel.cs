@@ -8,28 +8,28 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FictionMobile.MVVM.ViewModels
+namespace FictionMobile.MVVM.ViewModels;
+
+public partial class SearchViewModel : BaseViewModel
 {
-    public partial class SearchViewModel : BaseViewModel
+    private EpubBook _book;
+    [ObservableProperty]
+    private StoryDisplayModel _story;
+
+    public SearchViewModel()
     {
-        private EpubBook _book;
-        [ObservableProperty]
-        private StoryDisplayModel _story;
+        Story = new StoryDisplayModel();
+    }
 
-        public SearchViewModel()
-        {
-            Story = new StoryDisplayModel();
-        }
-
-        [RelayCommand]
-        private void ReturnToMain()
+    [RelayCommand]
+    private void ReturnToMain()
         {
             Shell.Current.GoToAsync("..");
             ClearStoryInfo();
         }
 
-        [RelayCommand]
-        private async Task SearchForFile()
+    [RelayCommand]
+    private async Task SearchForFile()
         {
             try
             {
@@ -67,13 +67,13 @@ namespace FictionMobile.MVVM.ViewModels
             }
         }
 
-        private void ClearStoryInfo()
-        {
-            Story.Title = string.Empty;
-            Story.Author = string.Empty;
-            Story.Chapters = string.Empty;
-            Story.Summary = string.Empty;
-            Story.EpubFile = string.Empty;
-        }
+    private void ClearStoryInfo()
+    {
+        Story.Title = string.Empty;
+        Story.Author = string.Empty;
+        Story.Chapters = string.Empty;
+        Story.Summary = string.Empty;
+        Story.EpubFile = string.Empty;
     }
 }
+

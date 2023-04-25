@@ -1,4 +1,5 @@
-﻿using Javax.Net.Ssl;
+﻿#if DEBUG
+using Javax.Net.Ssl;
 using System.Reflection;
 using System.Reflection.Emit;
 using Xamarin.Android.Net;
@@ -66,7 +67,9 @@ namespace FictionMobile.Platforms.Android
             return true;
         }
 
+
         public static IHostnameVerifier Create() => new DangerousHostNameVerifier();
     }
 }
 
+#endif

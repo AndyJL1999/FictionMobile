@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace FictionMobile.MVVM.Models
 {
-    public partial class StoryDisplayModel : INotifyPropertyChanged
+    public class StoryDisplayModel : INotifyPropertyChanged
     {
         private readonly int _id;
         private readonly int _userId;

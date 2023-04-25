@@ -8,42 +8,41 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FictionMobile.MVVM.ViewModels
+namespace FictionMobile.MVVM.ViewModels;
+
+[QueryProperty(nameof(Username), "Username")]
+public partial class MainViewModel : BaseViewModel
 {
-    public partial class MainViewModel : BaseViewModel
+    [ObservableProperty]
+    private string _username;
+
+    public MainViewModel()
     {
-        [ObservableProperty]
-        private string _username;
-        private readonly IAPIHelper _apiHelper;
+        
+    }
 
-        public MainViewModel(IAPIHelper apiHelper)
-        {
-            _apiHelper = apiHelper;
-            _username = _apiHelper.LoggedInUser.Username;
-        }
+    [RelayCommand]
+    private async Task GoToStories()
+    {
+        await Shell.Current.GoToAsync(nameof(StoriesView));
+    }
 
-        [RelayCommand]
-        private async Task GoToStories()
-        {
-            await Shell.Current.GoToAsync(nameof(StoriesView));
-        }
+    [RelayCommand]
+    private async Task GoToAccount()
+    {
+        await Shell.Current.GoToAsync(nameof(AccountView));
+    }
 
-        [RelayCommand]
-        private async Task GoToAccount()
-        {
-            await Shell.Current.GoToAsync(nameof(AccountView));
-        }
+    [RelayCommand]
+    private async Task GoToSearch()
+    {
+        await Shell.Current.GoToAsync(nameof(SearchView));
+    }
 
-        [RelayCommand]
-        private async Task GoToSearch()
-        {
-            await Shell.Current.GoToAsync(nameof(SearchView));
-        }
-
-        [RelayCommand]
-        private async Task GoToHistory()
-        {
-            await Shell.Current.GoToAsync(nameof(HistoryView));
-        }
+    [RelayCommand]
+    private async Task GoToHistory()
+    {
+        await Shell.Current.GoToAsync(nameof(HistoryView));
     }
 }
+

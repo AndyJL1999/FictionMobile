@@ -1,4 +1,5 @@
-﻿using Java.Net;
+﻿#if DEBUG
+using Java.Net;
 using Java.Security;
 using Java.Security.Cert;
 using Javax.Net.Ssl;
@@ -59,3 +60,4 @@ namespace FictionMobile.Platforms.Android
     }
 }
 
+#endif
