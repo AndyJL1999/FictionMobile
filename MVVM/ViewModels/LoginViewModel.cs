@@ -1,10 +1,13 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using FictionMobile.MVVM.Models;
 using FictionMobile.MVVM.Views;
 using Maui_UI_Fiction_Library.API;
+using Maui_UI_Fiction_Library.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -19,9 +22,13 @@ public partial class LoginViewModel : BaseViewModel
     [ObservableProperty]
     private string _password;
     [ObservableProperty]
+    private string _errorMessage;
+    [ObservableProperty]
     private bool _signUpFormVisible;
     [ObservableProperty]
     private bool _loginFormVisible;
+    [ObservableProperty]
+    private bool _isErrorVisible;
 
     private IAPIHelper _apiHelper;
 
@@ -29,6 +36,8 @@ public partial class LoginViewModel : BaseViewModel
 
     public LoginViewModel(IAPIHelper apiHelper)
     {
+        IsErrorVisible = false;
+
         LoginFormVisible = true;
         SignUpFormVisible = false;
 
@@ -36,6 +45,8 @@ public partial class LoginViewModel : BaseViewModel
 
         _apiHelper = apiHelper;
     }
+
+    public UserDisplayModel User { get; set; }
 
     [RelayCommand]
     private void SwitchForms()
@@ -59,17 +70,54 @@ public partial class LoginViewModel : BaseViewModel
         IsBusy = true;
         LoginFormVisible = false;
 
+        try
+        {
+            if (string.IsNullOrEmpty(Email) || string.IsNullOrEmpty(Password))
+                throw new Exception("Please don't leave any fields blank");
+            else
+                await Auth();
+
+            await Shell.Current.GoToAsync(nameof(MainView), true, new Dictionary<string, object>
+            {
+                { "User", User }
+            });
+        }
+        catch (WebException ex)
+        {
+            ErrorMessage = "Something went wrong";
+
+            IsErrorVisible = true;
+        }
+        catch (Exception ex)
+        {
+            if (ex.Message == "Unauthorized")
+                ErrorMessage = "Wrong Email or Password";
+            else
+                ErrorMessage = ex.Message;
+
+            IsErrorVisible = true;
+        }
+
+        IsBusy = false;
+        LoginFormVisible = true;
+    }
+
+    private async Task Auth()
+    {
         var result = await _apiHelper.Authenticate(Email, Password);
 
         await _apiHelper.GetUserInfo(result.Token);
 
-        await Shell.Current.GoToAsync($"{nameof(MainView)}?Username={_apiHelper.LoggedInUser.Username}");
+        User = new UserDisplayModel
+        {
+            Id = _apiHelper.LoggedInUser.Id,
+            Username = _apiHelper.LoggedInUser.Username,
+            Email = _apiHelper.LoggedInUser.Email
+        };
 
+        IsErrorVisible = false;
         Password = string.Empty;
         Email = string.Empty;
-
-        IsBusy = false;
-        LoginFormVisible = true;
     }
 }
 

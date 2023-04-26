@@ -19,13 +19,15 @@
                     <Label Text="Username"/>
                     <Frame StyleClass="StartUpForm">
                         <Entry Placeholder="Username" VerticalOptions="StartAndExpand" HorizontalOptions="FillAndExpand"
-                               Margin="20,0" HorizontalTextAlignment="Start" />
+                               Margin="20,0" HorizontalTextAlignment="Start" 
+                               Text="{Binding User.Username}"/>
                     </Frame>
 
                     <Label Text="Email"/>
                     <Frame StyleClass="StartUpForm">
                         <Entry Placeholder="email@email.com" VerticalOptions="StartAndExpand" HorizontalOptions="FillAndExpand"
-                               Margin="20,0" HorizontalTextAlignment="Start" />
+                               Margin="20,0" HorizontalTextAlignment="Start"
+                               Text="{Binding User.Email}"/>
                     </Frame>
 
                     <Button Text="Update" HeightRequest="40" WidthRequest="80"/>
@@ -40,19 +42,15 @@
                     <Label Text="Old Password"/>
                     <Frame StyleClass="StartUpForm" Grid.Row="1">
                         <Entry Placeholder="Old Password" VerticalOptions="StartAndExpand" HorizontalOptions="FillAndExpand"
-                               Margin="20,0" HorizontalTextAlignment="Start" />
+                               Margin="20,0" HorizontalTextAlignment="Start" IsPassword="True"
+                               Text="{Binding OldPassword}"/>
                     </Frame>
 
                     <Label Text="New Password"/>
                     <Frame StyleClass="StartUpForm" Grid.Row="1">
                         <Entry Placeholder="New Password" VerticalOptions="StartAndExpand" HorizontalOptions="FillAndExpand"
-                               Margin="20,0" HorizontalTextAlignment="Start" />
-                    </Frame>
-
-                    <Label Text="Confirm Password"/>
-                    <Frame StyleClass="StartUpForm" Grid.Row="1">
-                        <Entry Placeholder="Confirm Password" VerticalOptions="StartAndExpand" HorizontalOptions="FillAndExpand"
-                               Margin="20,0" HorizontalTextAlignment="Start" />
+                               Margin="20,0" HorizontalTextAlignment="Start" IsPassword="True"
+                               Text="{Binding NewPassword}"/>
                     </Frame>
 
                     <Button Text="Update" HeightRequest="40" WidthRequest="80"/>

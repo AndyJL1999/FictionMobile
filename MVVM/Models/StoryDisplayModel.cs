@@ -10,8 +10,6 @@ namespace FictionMobile.MVVM.Models
 {
     public class StoryDisplayModel : INotifyPropertyChanged
     {
-        private readonly int _id;
-        private readonly int _userId;
         private string _title = string.Empty;
         private string _author = string.Empty;
         private string _chapters = string.Empty;

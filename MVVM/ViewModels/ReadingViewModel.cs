@@ -1,5 +1,4 @@
-﻿using Android.Graphics.Fonts;
-using CommunityToolkit.Mvvm.ComponentModel;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using EpubSharp;
 using FictionMobile.MVVM.Models;
@@ -54,13 +53,16 @@ public partial class ReadingViewModel : BaseViewModel
     {
         //Adding background color and font styles to <body> tag of html
         int index = pageText.IndexOf("<body>");
-        pageText = pageText.Insert(index + 5, $" bgcolor=\"{backgroundColor}\" style=\"color:{fontColor}; font-family:{fontFamily}; overflow-y:scroll;\" ");
+        pageText = pageText.Insert(index + 5, $" bgcolor=\"{backgroundColor}\" style=\"color:{fontColor}; font-family:{fontFamily}\" ");
 
         return pageText;
     }
 
     partial void OnStoryInfoChanged(StoryDisplayModel value)
     {
+        if(ChapterList != null)
+            ChapterList.Clear();
+
         SetPage();
     }
 

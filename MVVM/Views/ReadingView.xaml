@@ -16,7 +16,7 @@
         <CarouselView Grid.Row="1" ItemsSource="{Binding ChapterList}" Loop="False">
             <CarouselView.ItemTemplate>
                 <DataTemplate>
-                    <ScrollView>
+                    <ScrollView Orientation="Neither">
                         <Grid>
                             <WebView HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
                                 <WebView.Source>

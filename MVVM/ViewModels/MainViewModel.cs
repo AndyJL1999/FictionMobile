@@ -1,7 +1,9 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using FictionMobile.MVVM.Models;
 using FictionMobile.MVVM.Views;
 using Maui_UI_Fiction_Library.API;
+using Maui_UI_Fiction_Library.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,11 +12,11 @@ using System.Threading.Tasks;
 
 namespace FictionMobile.MVVM.ViewModels;
 
-[QueryProperty(nameof(Username), "Username")]
+[QueryProperty(nameof(User), "User")]
 public partial class MainViewModel : BaseViewModel
 {
     [ObservableProperty]
-    private string _username;
+    private UserDisplayModel _user;
 
     public MainViewModel()
     {
@@ -24,13 +26,19 @@ public partial class MainViewModel : BaseViewModel
     [RelayCommand]
     private async Task GoToStories()
     {
-        await Shell.Current.GoToAsync(nameof(StoriesView));
+        await Shell.Current.GoToAsync(nameof(StoriesView), true, new Dictionary<string, object>
+        {
+            { nameof(User), User }
+        });
     }
 
     [RelayCommand]
     private async Task GoToAccount()
     {
-        await Shell.Current.GoToAsync(nameof(AccountView));
+        await Shell.Current.GoToAsync(nameof(AccountView), true, new Dictionary<string, object>
+        {
+            { nameof(User), User }
+        });
     }
 
     [RelayCommand]
@@ -42,7 +50,11 @@ public partial class MainViewModel : BaseViewModel
     [RelayCommand]
     private async Task GoToHistory()
     {
-        await Shell.Current.GoToAsync(nameof(HistoryView));
+        await Shell.Current.GoToAsync(nameof(HistoryView), true, new Dictionary<string, object>
+        {
+            { nameof(User), User }
+        });
     }
+
 }
 

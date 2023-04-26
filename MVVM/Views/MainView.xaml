@@ -9,7 +9,7 @@
 
         <VerticalStackLayout StyleClass="Header" VerticalOptions="Start">
             <Label Text="Welcome!" FontSize="Title"/>
-            <Label StyleClass="HeaderSubTitle" Text="{Binding Username}"/>
+            <Label StyleClass="HeaderSubTitle" Text="{Binding User.Username}"/>
         </VerticalStackLayout>
 
         <Grid ColumnDefinitions="*,*" RowDefinitions="*,*" Grid.Row="1" Grid.ColumnSpan="2">

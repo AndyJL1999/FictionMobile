@@ -13,8 +13,11 @@ using System.Threading.Tasks;
 
 namespace FictionMobile.MVVM.ViewModels;
 
+[QueryProperty(nameof(User), "User")]
 public partial class HistoryViewModel : BaseViewModel
 {
+    [ObservableProperty]
+    private UserDisplayModel _user;
     [ObservableProperty]
     private ObservableCollection<StoryDisplayModel> _storiesRead;
     private readonly IMapper _mapper;
@@ -24,8 +27,6 @@ public partial class HistoryViewModel : BaseViewModel
     {
         _mapper = mapper;
         _storyEndpoint = storyEndpoint;
-
-        FillHistory();
     }
 
     [RelayCommand]
@@ -47,6 +48,11 @@ public partial class HistoryViewModel : BaseViewModel
         var stories = _mapper.Map<IEnumerable<StoryDisplayModel>>(payload);
 
         StoriesRead = new ObservableCollection<StoryDisplayModel>(stories);
+    }
+
+    partial void OnUserChanged(UserDisplayModel value)
+    {
+        FillHistory();
     }
 }
 

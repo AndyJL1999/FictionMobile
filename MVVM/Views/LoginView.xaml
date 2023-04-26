@@ -22,6 +22,9 @@
                 <Label Text="Welcome!" HorizontalOptions="Center" FontSize="Title"/>
                 <Label Text="Sign in to continue" HorizontalOptions="Center" FontSize="Subtitle"/>
 
+                <Label Text="{Binding ErrorMessage}" HorizontalOptions="Center" TextColor="Red"
+                       IsVisible="{Binding IsErrorVisible}"/>
+                
                 <Label Text="Email" Margin="0,15,0,0" FontSize="Subtitle"/>
                 <Frame StyleClass="StartUpForm">
                     <Entry Placeholder="email@email.com" VerticalOptions="Center" HorizontalOptions="FillAndExpand"
