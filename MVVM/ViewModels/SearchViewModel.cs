@@ -1,12 +1,10 @@
-﻿using Android.Telephony;
-using AutoMapper;
+﻿using AutoMapper;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
 using EpubSharp;
 using FictionMobile.MVVM.Models;
 using FictionMobile.Resources.Messangers;
-using Java.Sql;
 using Maui_UI_Fiction_Library.API;
 using Maui_UI_Fiction_Library.Models;
 using System;
@@ -22,16 +20,16 @@ namespace FictionMobile.MVVM.ViewModels;
 public partial class SearchViewModel : BaseViewModel
 {
     private EpubBook _book;
+
     [ObservableProperty]
     private StoryDisplayModel _story;
     [ObservableProperty]
     private string _resultMessage;
     [ObservableProperty]
-    private Brush _resultColor;
-    [ObservableProperty]
     private bool _isMessageVisible;
     [ObservableProperty]
     private bool _isSaveButtonVisible;
+
     private readonly IMapper _mapper;
     private readonly IMessenger _messenger;
     private readonly IStoryEndpoint _storyEndpoint;
@@ -52,6 +50,7 @@ public partial class SearchViewModel : BaseViewModel
     {
         Shell.Current.GoToAsync("..");
         ClearStoryInfo();
+        IsMessageVisible = false;
     }
 
     [RelayCommand]
@@ -59,6 +58,8 @@ public partial class SearchViewModel : BaseViewModel
     {
         try
         {
+            IsMessageVisible = false;
+
             var result = await FilePicker.Default.PickAsync(new PickOptions
             {
                 FileTypes = new FilePickerFileType(new Dictionary<DevicePlatform, IEnumerable<string>>
@@ -99,7 +100,7 @@ public partial class SearchViewModel : BaseViewModel
             }
 
         }
-        catch (Exception ex)
+        catch
         {
             ResultMessage = "There was a problem";
         }
@@ -127,18 +128,16 @@ public partial class SearchViewModel : BaseViewModel
 
                 _messenger.Send(new AddToStoriesMessenger(Story));
 
-                ResultColor = new SolidColorBrush(Colors.LimeGreen);
                 ResultMessage = "Upload Successful!";
                 IsMessageVisible = true;
             }
             else
             {
-                ResultColor = new SolidColorBrush(Colors.Red);
                 ResultMessage = "Story may already exist in your library";
                 IsMessageVisible = true;
             }
 
-            IsSaveButtonVisible = false;
+            ClearStoryInfo();
         }
         catch
         {
@@ -159,7 +158,7 @@ public partial class SearchViewModel : BaseViewModel
         Story.Chapters = string.Empty;
         Story.Summary = string.Empty;
         Story.EpubFile = string.Empty;
-        IsMessageVisible = false;
+        IsSaveButtonVisible = false;
     }
 }
 

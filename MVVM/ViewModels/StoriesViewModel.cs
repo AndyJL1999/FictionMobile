@@ -61,11 +61,13 @@ public partial class StoriesViewModel : BaseViewModel, IRecipient<AddToStoriesMe
 
     partial void OnUserChanged(UserDisplayModel value)
     {
+        //When a new user is logged in get their specific stories
         FillStories();
     }
 
     public void Receive(AddToStoriesMessenger message)
     {
+        //When a new story is added refresh Stories collection
         FillStories();
     }
 }
