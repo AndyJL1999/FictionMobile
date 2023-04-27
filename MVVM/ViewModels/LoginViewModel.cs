@@ -67,11 +67,11 @@ public partial class LoginViewModel : BaseViewModel
     [RelayCommand]
     private async Task GoToMainView()
     {
-        IsBusy = true;
-        LoginFormVisible = false;
-
         try
         {
+            IsBusy = true;
+            LoginFormVisible = false;
+
             if (string.IsNullOrEmpty(Email) || string.IsNullOrEmpty(Password))
                 throw new Exception("Please don't leave any fields blank");
             else
@@ -82,9 +82,9 @@ public partial class LoginViewModel : BaseViewModel
                 { "User", User }
             });
         }
-        catch (WebException ex)
+        catch (WebException)
         {
-            ErrorMessage = "Something went wrong";
+            ErrorMessage = "Trouble connecting to server";
 
             IsErrorVisible = true;
         }
@@ -93,13 +93,16 @@ public partial class LoginViewModel : BaseViewModel
             if (ex.Message == "Unauthorized")
                 ErrorMessage = "Wrong Email or Password";
             else
-                ErrorMessage = ex.Message;
+                ErrorMessage = "Something went wrong";
 
             IsErrorVisible = true;
         }
-
-        IsBusy = false;
-        LoginFormVisible = true;
+        finally
+        {
+            IsBusy = false;
+            LoginFormVisible = true;
+        }
+        
     }
 
     private async Task Auth()

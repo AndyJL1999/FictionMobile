@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using CommunityToolkit.Mvvm.Messaging;
 using FictionMobile.MVVM.Models;
 using FictionMobile.MVVM.ViewModels;
 using FictionMobile.MVVM.Views;
@@ -56,6 +57,8 @@ public static class MauiProgram
 		builder.Services.AddSingleton<IAPIHelper, APIHelper>();
         builder.Services.AddSingleton<IStoryEndpoint, StoryEndpoint>();
         builder.Services.AddSingleton<ILoggedInUser, LoggedInUser>();
+
+        builder.Services.AddScoped<IMessenger, WeakReferenceMessenger>();
 
         var a = Assembly.GetExecutingAssembly();
         using var stream = a.GetManifestResourceStream("FictionMobile.appSettings.json");

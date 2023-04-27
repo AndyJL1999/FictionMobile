@@ -40,18 +40,26 @@
                                    TextColor="AliceBlue"
                                    DetailColor="LimeGreen"
                                    Detail="{Binding Story.Chapters}"/>
-                        <TextCell  Text="Summary:"
-                                   TextColor="AliceBlue"
-                                   DetailColor="LimeGreen"
-                                   Detail="Unavailable"/>
                     </TableSection>
                 </TableRoot>
             </TableView>
-          
+
+            <Label Text="{Binding ResultMessage}" HorizontalOptions="Center"
+                   FontSize="Subtitle" Margin="0,0,0,15"
+                   FontAttributes="Bold" TextColor="{Binding ResultColor}"
+                   IsVisible="{Binding IsMessageVisible}"/>
 
             <Button Text="Save" BackgroundColor="LimeGreen"
                     TextColor="AliceBlue" Margin="0,25,0,0"
-                    HeightRequest="50" WidthRequest="100"/>
+                    HeightRequest="50" WidthRequest="100"
+                    IsVisible="{Binding IsSaveButtonVisible}"
+                    Command="{Binding AddStoryCommand}"/>
+
+            <ActivityIndicator Color="AliceBlue"
+                               HeightRequest="100"
+                               WidthRequest="100"
+                               IsRunning="{Binding IsBusy}"/>
+
         </VerticalStackLayout>
     </Grid>
 </ContentPage>
