@@ -1,7 +1,9 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using CommunityToolkit.Mvvm.Messaging;
 using FictionMobile.MVVM.Models;
 using FictionMobile.MVVM.Views;
+using FictionMobile.Resources.Messangers;
 using Maui_UI_Fiction_Library.API;
 using Maui_UI_Fiction_Library.Models;
 using System;
@@ -35,10 +37,11 @@ public partial class LoginViewModel : BaseViewModel
     private bool _isResultVisible;
 
     private IAPIHelper _apiHelper;
+    private readonly IMessenger _messenger;
 
     //TODO - Wire up Login and Sign up functions
 
-    public LoginViewModel(IAPIHelper apiHelper)
+    public LoginViewModel(IAPIHelper apiHelper, IMessenger messenger)
     {
         IsErrorVisible = false;
 
@@ -48,6 +51,7 @@ public partial class LoginViewModel : BaseViewModel
         Title = "LOGIN";
 
         _apiHelper = apiHelper;
+        _messenger = messenger;
     }
 
     public UserDisplayModel User { get; set; }
@@ -143,6 +147,8 @@ public partial class LoginViewModel : BaseViewModel
             Username = _apiHelper.LoggedInUser.Username,
             Email = _apiHelper.LoggedInUser.Email
         };
+
+        Preferences.Set("UserPassword", Password);
 
         IsErrorVisible = false;
         IsResultVisible = false;

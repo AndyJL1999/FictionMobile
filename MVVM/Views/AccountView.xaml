@@ -9,28 +9,27 @@
                VerticalOptions="Center" Grid.Column="1" FontAttributes="Bold"/>
 
 
-        <VerticalStackLayout Spacing="25" Grid.Row="1" Grid.Column="1">
+        <VerticalStackLayout Spacing="45" Grid.Row="1" Grid.Column="1">
             
             <Grid RowDefinitions=".1*,.9*">
 
                 <Label Text="Change Username or Email" FontSize="Subtitle" HorizontalOptions="Center" FontAttributes="Bold"/>
 
-                <VerticalStackLayout Grid.Row="1" Spacing="10">
-                    <Label Text="Username"/>
+                <VerticalStackLayout Grid.Row="1">
+                    <Label Text="Username" Margin="0,10"/>
                     <Frame StyleClass="StartUpForm">
                         <Entry Placeholder="Username" VerticalOptions="StartAndExpand" HorizontalOptions="FillAndExpand"
                                Margin="20,0" HorizontalTextAlignment="Start" 
-                               Text="{Binding User.Username}"/>
+                               Text="{Binding NewUsername}"/>
                     </Frame>
 
-                    <Label Text="Email"/>
+                    <Label Text="Email" Margin="0,10"/>
                     <Frame StyleClass="StartUpForm">
                         <Entry Placeholder="email@email.com" VerticalOptions="StartAndExpand" HorizontalOptions="FillAndExpand"
                                Margin="20,0" HorizontalTextAlignment="Start"
-                               Text="{Binding User.Email}"/>
+                               Text="{Binding NewEmail}"/>
                     </Frame>
 
-                    <Button Text="Update" HeightRequest="40" WidthRequest="80"/>
                 </VerticalStackLayout>
             </Grid>
 
@@ -38,26 +37,30 @@
 
                 <Label Text="Change Password" FontSize="Subtitle" HorizontalOptions="Center" FontAttributes="Bold"/>
 
-                <VerticalStackLayout Grid.Row="1" Spacing="10">
-                    <Label Text="Old Password"/>
+                <VerticalStackLayout Grid.Row="1">
+                    <Label Text="Old Password" Margin="0,10"/>
                     <Frame StyleClass="StartUpForm" Grid.Row="1">
                         <Entry Placeholder="Old Password" VerticalOptions="StartAndExpand" HorizontalOptions="FillAndExpand"
                                Margin="20,0" HorizontalTextAlignment="Start" IsPassword="True"
-                               Text="{Binding OldPassword}"/>
+                               Text="{Binding OldPassword}" Unfocused="passEntry_Unfocused"/>
                     </Frame>
 
-                    <Label Text="New Password"/>
+                    <Label Text="New Password" Margin="0,10"/>
                     <Frame StyleClass="StartUpForm" Grid.Row="1">
                         <Entry Placeholder="New Password" VerticalOptions="StartAndExpand" HorizontalOptions="FillAndExpand"
                                Margin="20,0" HorizontalTextAlignment="Start" IsPassword="True"
-                               Text="{Binding NewPassword}"/>
+                               Text="{Binding NewPassword}" Unfocused="newEntry_Unfocused"/>
                     </Frame>
 
-                    <Button Text="Update" HeightRequest="40" WidthRequest="80"/>
                 </VerticalStackLayout>
             </Grid>
-            
+
+            <Button Text="Update" HeightRequest="40" WidthRequest="80" Margin="0,5"
+                            Command="{Binding UpdateCommand}"/>
+
+            <Label Text="{Binding UpdateText}" IsVisible="{Binding UpdateVisible}" HorizontalOptions="Center"/>
         </VerticalStackLayout>
+
 
         <Button Grid.Row="3" Grid.Column="1"
                 Text="Logout"
