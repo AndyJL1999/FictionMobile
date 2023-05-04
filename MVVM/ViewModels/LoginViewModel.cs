@@ -24,11 +24,15 @@ public partial class LoginViewModel : BaseViewModel
     [ObservableProperty]
     private string _errorMessage;
     [ObservableProperty]
+    private string _resultMessage;
+    [ObservableProperty]
     private bool _signUpFormVisible;
     [ObservableProperty]
     private bool _loginFormVisible;
     [ObservableProperty]
     private bool _isErrorVisible;
+    [ObservableProperty]
+    private bool _isResultVisible;
 
     private IAPIHelper _apiHelper;
 
@@ -53,6 +57,8 @@ public partial class LoginViewModel : BaseViewModel
     {
         LoginFormVisible = !LoginFormVisible;
         SignUpFormVisible = !SignUpFormVisible;
+
+        IsResultVisible = false;
 
         Username = string.Empty;
         Password = string.Empty;
@@ -105,6 +111,26 @@ public partial class LoginViewModel : BaseViewModel
         
     }
 
+    [RelayCommand]
+    public async void Register()
+    {
+        try
+        {
+            IsResultVisible = false;
+
+            await _apiHelper.Register(Username, Password, Email);
+        }
+        catch(Exception ex)
+        {
+            ResultMessage = ex.Message.Trim('"');
+        }
+        finally
+        {
+            IsResultVisible = true;
+        }
+        
+    }
+
     private async Task Auth()
     {
         var result = await _apiHelper.Authenticate(Email, Password);
@@ -119,6 +145,7 @@ public partial class LoginViewModel : BaseViewModel
         };
 
         IsErrorVisible = false;
+        IsResultVisible = false;
         Password = string.Empty;
         Email = string.Empty;
     }

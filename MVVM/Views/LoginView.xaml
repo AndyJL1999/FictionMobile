@@ -55,6 +55,9 @@
                 <Label Text="Welcome!" HorizontalOptions="Center" FontSize="Title"/>
                 <Label Text="Register here" HorizontalOptions="Center" FontSize="Subtitle"/>
 
+                <Label Text="{Binding ResultMessage}" HorizontalOptions="Center" TextColor="Red"
+                       IsVisible="{Binding IsResultVisible}"/>
+
                 <Label Text="Username" Margin="0,15,0,0" FontSize="Subtitle"/>
                 <Frame StyleClass="StartUpForm">
                     <Entry Placeholder="Username" VerticalOptions="Center" HorizontalOptions="FillAndExpand"
@@ -77,7 +80,8 @@
                            Text="{Binding Password}"/>
                 </Frame>
 
-                <Button Text="Register" Margin="0,30,0,0" FontAttributes="Bold" CornerRadius="30" WidthRequest="200"/>
+                <Button Text="Register" Margin="0,30,0,0" FontAttributes="Bold" CornerRadius="30" WidthRequest="200"
+                        Command="{Binding RegisterCommand}"/>
 
                 <Label Text="Login" TextColor="AliceBlue" FontAttributes="Bold" HorizontalOptions="CenterAndExpand"
                        Margin="0,60,0,0">
