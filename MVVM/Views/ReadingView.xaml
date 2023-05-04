@@ -4,39 +4,51 @@
              xmlns:vm="clr-namespace:FictionMobile.MVVM.ViewModels"
              x:Class="FictionMobile.MVVM.Views.ReadingView"
              Title="Reading"
-             Shell.FlyoutBehavior="Flyout">
+             Shell.FlyoutBehavior="Flyout"
+             Shell.NavBarIsVisible="False">
 
-    <Grid RowDefinitions=".08*,.92*" >
+    <Grid RowDefinitions=".08*,.92*" ColumnDefinitions="*,*">
 
         <VerticalStackLayout StyleClass="Header" VerticalOptions="Start">
             <Label Text="{Binding StoryInfo.Title}" FontSize="Header"/>
             <Label Text="{Binding StoryInfo.Author}" FontSize="Micro"/>
         </VerticalStackLayout>
 
-        <CarouselView Grid.Row="1" ItemsSource="{Binding ChapterList}" Loop="False">
+        <Frame Grid.Column="1" HorizontalOptions="End" BackgroundColor="Black" BorderColor="Transparent">
+            <Frame.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding SetFontCommand}"/>
+            </Frame.GestureRecognizers>
+
+            <Label Text="A"/>
+        </Frame>
+
+        <CarouselView Grid.Row="1" ItemsSource="{Binding ChapterList}" Loop="False" 
+                      Grid.ColumnSpan="2" BackgroundColor="#272537">
             <CarouselView.ItemTemplate>
                 <DataTemplate>
-                    <ScrollView Orientation="Neither">
-                        <Grid>
-                            <WebView HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-                                <WebView.Source>
-                                    <HtmlWebViewSource Html="{Binding}"/>
-                                </WebView.Source>
-                            </WebView>
-
-                        </Grid>
-                    </ScrollView>
+                    <CollectionView ItemsSource="{Binding}">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <WebView>
+                                    <WebView.Source>
+                                        <HtmlWebViewSource Html="{Binding}"/>
+                                    </WebView.Source>
+                                </WebView>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
                 </DataTemplate>
             </CarouselView.ItemTemplate>
 
         </CarouselView>
 
         <ActivityIndicator Grid.RowSpan="2"
+                           Grid.ColumnSpan="2"
                            Color="AliceBlue"
                            HeightRequest="100"
                            WidthRequest="100"
                            IsRunning="{Binding IsBusy}"/>
 
     </Grid>
-    
+
 </ContentPage>

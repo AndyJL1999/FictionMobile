@@ -10,4 +10,5 @@ public partial class ReadingView : ContentPage
 
 		BindingContext = viewModel;
 	}
+
 }
