@@ -20,6 +20,10 @@ public partial class ReadingViewModel : BaseViewModel
     private ObservableCollection<string> _fonts;
     [ObservableProperty]
     private ObservableCollection<int> _fontSizes;
+    [ObservableProperty]
+    private string currentFont;
+    [ObservableProperty]
+    private int currentFontSize;
 
     private EpubBook _book;
 
@@ -33,29 +37,37 @@ public partial class ReadingViewModel : BaseViewModel
         Fonts = new ObservableCollection<string>
         {
             "Arial",
-            "Verdana",
-            "Tahoma",
-            "Trebuchet MS",
             "Times New Roman",
-            "Georgia",
-            "Garamond",
             "Courier New",
-            "Brush Script MT"
         };
 
         FontSizes = new ObservableCollection<int>
         {
-            8, 12, 16, 18, 21, 24, 32, 48, 64
+            8, 12, 16, 18, 21, 24, 32
         };
 
+        CurrentFont = "Arial";
+        CurrentFontSize = 16;
     }
 
     [RelayCommand]
-    public void SetFont()
+    public void OpenFontPopup()
     {
         var popup = new FontPopUp(this);
 
         Shell.Current.ShowPopup(popup);
+    }
+
+    [RelayCommand]
+    public void ChangeFont(FontPopUp popUp)
+    {
+        foreach(var chapter in ChapterList)
+        {
+            chapter[0] = 
+                SetChapterStyle(chapter[0], "#272537", "AliceBlue", CurrentFont, CurrentFontSize);
+        }
+
+        popUp.Close();
     }
 
     private async void SetPage()
@@ -76,21 +88,31 @@ public partial class ReadingViewModel : BaseViewModel
     {
         var pages = new ObservableCollection<ObservableCollection<string>>();
 
-        foreach(var chapter in chapters)
-        {
-            chapter.TextContent = SetChapterStyle(chapter.TextContent ,"#272537", "AliceBlue", "Ariel");
-            pages.Add(new ObservableCollection<string> { chapter.TextContent });
-        }
+        chapters
+            .ToList()
+            .ForEach((c) => 
+            { 
+                c.TextContent = SetChapterStyle(c.TextContent, "#272537", "AliceBlue", CurrentFont, CurrentFontSize);
+                pages.Add(new ObservableCollection<string> { c.TextContent });
+            });
 
         ChapterList = pages;
     }
 
-    private string SetChapterStyle(string pageText, string backgroundColor, string fontColor, string fontFamily)
+    private string SetChapterStyle(string pageText, string backgroundColor, string fontColor, string fontFamily, int fontSize)
     {
         //Adding background color and font styles to <body> tag of html
-        int index = pageText.IndexOf("<body>");
-        pageText = pageText.Insert(index + 5, $" bgcolor=\"{backgroundColor}\" style=\"color:{fontColor}; font-family:{fontFamily}\" ");
+        int index = pageText.IndexOf("<body");
 
+        if(pageText.ElementAt(index + 5) != '>')
+        {
+            var endIndex = pageText.IndexOf("px\"");
+            var count = (endIndex + 3) - (index + 5);
+            pageText = pageText.Remove(index + 5, count);
+        }
+
+        pageText = pageText.Insert(index + 5, $" bgcolor=\"{backgroundColor}\" style=\"color:{fontColor}; font-family:{fontFamily}; font-size:{fontSize}px\"");
+        
         return pageText;
     }
 

@@ -7,7 +7,7 @@
              Shell.FlyoutBehavior="Flyout"
              Shell.NavBarIsVisible="False">
 
-    <Grid RowDefinitions=".08*,.92*" ColumnDefinitions="*,*">
+    <Grid RowDefinitions=".08*,.92*" ColumnDefinitions=".85*,.15*">
 
         <VerticalStackLayout StyleClass="Header" VerticalOptions="Start">
             <Label Text="{Binding StoryInfo.Title}" FontSize="Header"/>
@@ -16,7 +16,7 @@
 
         <Frame Grid.Column="1" HorizontalOptions="End" BackgroundColor="Black" BorderColor="Transparent">
             <Frame.GestureRecognizers>
-                <TapGestureRecognizer Command="{Binding SetFontCommand}"/>
+                <TapGestureRecognizer Command="{Binding OpenFontPopupCommand}"/>
             </Frame.GestureRecognizers>
 
             <Label Text="A"/>

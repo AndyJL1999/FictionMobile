@@ -17,16 +17,23 @@
             
             <Label Text="Fonts" Margin="15,0"/>
             <Picker BackgroundColor="AliceBlue" Margin="15,0,15,10"
-                    HeightRequest="25" ItemsSource="{Binding Fonts}"/>
+                    HeightRequest="35" ItemsSource="{Binding Fonts}" TextColor="Black"
+                    VerticalTextAlignment="End" 
+                    SelectedItem="{Binding CurrentFont}"/>
             
             <Label Text="Font Sizes" Margin="15,0"/>
             <Picker BackgroundColor="AliceBlue" Margin="15,0,15,10"
-                    HeightRequest="25" ItemsSource="{Binding FontSizes}"/>
+                    HeightRequest="35" ItemsSource="{Binding FontSizes}" TextColor="Black"
+                    VerticalTextAlignment="End" 
+                    SelectedItem="{Binding CurrentFontSize}"/>
+            
         </VerticalStackLayout>
 
         <Button Text="Confirm" BackgroundColor="AliceBlue" CornerRadius="30" 
                 WidthRequest="100" HeightRequest="45" Margin="10"
-                HorizontalOptions="Center" VerticalOptions="Center" Grid.Row="2"/>
+                HorizontalOptions="Center" VerticalOptions="Center" Grid.Row="2"
+                Command="{Binding ChangeFontCommand}"
+                CommandParameter="{Binding Source={RelativeSource AncestorType={x:Type mct:Popup}}, Path=.}"/>
     </Grid>
 
 </mct:Popup>
