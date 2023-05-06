@@ -23,7 +23,13 @@
         </Frame>
 
         <CarouselView Grid.Row="1" ItemsSource="{Binding ChapterList}" Loop="False" 
-                      Grid.ColumnSpan="2" BackgroundColor="#272537">
+                      Grid.ColumnSpan="2" BackgroundColor="#272537" x:Name="carouselView">
+            <CarouselView.ItemsLayout>
+                <LinearItemsLayout Orientation="Horizontal"
+                                   SnapPointsAlignment="Center"
+                                   SnapPointsType="MandatorySingle"/>
+            </CarouselView.ItemsLayout>
+            
             <CarouselView.ItemTemplate>
                 <DataTemplate>
                     <CollectionView ItemsSource="{Binding}">
@@ -33,6 +39,11 @@
                                     <WebView.Source>
                                         <HtmlWebViewSource Html="{Binding}"/>
                                     </WebView.Source>
+
+                                    <!--  This is to prevent any links from being used -->
+                                    <WebView.GestureRecognizers>
+                                        <PanGestureRecognizer/>
+                                    </WebView.GestureRecognizers>
                                 </WebView>
                             </DataTemplate>
                         </CollectionView.ItemTemplate>

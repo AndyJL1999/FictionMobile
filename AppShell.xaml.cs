@@ -1,12 +1,15 @@
-﻿using FictionMobile.MVVM.Views;
+﻿using FictionMobile.MVVM.ViewModels;
+using FictionMobile.MVVM.Views;
 
 namespace FictionMobile;
 
 public partial class AppShell : Shell
 {
-	public AppShell()
+	public AppShell(AppShellViewModel vm)
 	{
 		InitializeComponent();
+
+        BindingContext = vm;
 
 		Routing.RegisterRoute(nameof(MainView), typeof(MainView));
         Routing.RegisterRoute(nameof(StoriesView), typeof(StoriesView));
@@ -15,4 +18,5 @@ public partial class AppShell : Shell
         Routing.RegisterRoute(nameof(AccountView), typeof(AccountView));
         Routing.RegisterRoute(nameof(SearchView), typeof(SearchView));
     }
+
 }

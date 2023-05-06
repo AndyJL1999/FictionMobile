@@ -6,33 +6,44 @@ using FictionMobile.MVVM.Models;
 using Maui_UI_Fiction_Library.API;
 using System.Collections.ObjectModel;
 using FictionMobile.MVVM.Views.PopUps;
+using CommunityToolkit.Mvvm.Messaging;
+using FictionMobile.Resources.Messangers;
+using FictionMobile.Interfaces;
 
 namespace FictionMobile.MVVM.ViewModels;
 
 [QueryProperty(nameof(StoryInfo), "SelectedStory")]
-public partial class ReadingViewModel : BaseViewModel
+public partial class ReadingViewModel : BaseViewModel, IRecipient<SelectedChapterMessage>,
+    IHasCollectionViewModel
 {
     [ObservableProperty]
     private StoryDisplayModel _storyInfo;
     [ObservableProperty]
     private ObservableCollection<ObservableCollection<string>> _chapterList;
     [ObservableProperty]
+    private ObservableCollection<string> _titles;
+    [ObservableProperty]
     private ObservableCollection<string> _fonts;
     [ObservableProperty]
     private ObservableCollection<int> _fontSizes;
     [ObservableProperty]
-    private string currentFont;
+    private string _currentFont;
     [ObservableProperty]
-    private int currentFontSize;
+    private int _currentFontSize;
+    [ObservableProperty]
+    private int _selectedChapterIndex;
 
     private EpubBook _book;
 
     private readonly IStoryEndpoint _storyEndpoint;
+    private readonly IMessenger _messenger;
 
-    //TODO - Finish setting up fonts and font sizes for page
-    public ReadingViewModel(IStoryEndpoint storyEndpoint)
+    public IHasCollectionView View { get; set; }
+
+    public ReadingViewModel(IStoryEndpoint storyEndpoint, IMessenger messenger)
     {
         _storyEndpoint = storyEndpoint;
+        _messenger = messenger;
 
         Fonts = new ObservableCollection<string>
         {
@@ -48,6 +59,8 @@ public partial class ReadingViewModel : BaseViewModel
 
         CurrentFont = "Arial";
         CurrentFontSize = 16;
+
+        _messenger.Register<SelectedChapterMessage>(this);
     }
 
     [RelayCommand]
@@ -78,6 +91,14 @@ public partial class ReadingViewModel : BaseViewModel
             .Read(await _storyEndpoint.GetStoryForReading(StoryInfo.Id));
 
         var chapters = _book.Resources.Html;
+
+        var titleList = _book.TableOfContents
+                .Select(c => c.Title)
+                .ToList();
+
+        Titles = new ObservableCollection<string>(titleList);
+
+        _messenger.Send(new UpdateFlyoutMessage(Titles));
 
         SetChapters(chapters);
 
@@ -124,4 +145,20 @@ public partial class ReadingViewModel : BaseViewModel
         SetPage();
     }
 
+    public void Receive(SelectedChapterMessage message)
+    {
+        var diff = ChapterList.Count - Titles.Count;
+
+        SelectedChapterIndex = Titles.IndexOf(
+            Titles.Where(c => c == message.Value).FirstOrDefault());
+
+        if (diff != 0)
+        {
+            View.CarouselView.ScrollTo(SelectedChapterIndex + 1, -1, ScrollToPosition.MakeVisible,false);
+        }
+        else
+        {
+            View.CarouselView.ScrollTo(SelectedChapterIndex, -1, ScrollToPosition.MakeVisible, false);
+        }
+    }
 }

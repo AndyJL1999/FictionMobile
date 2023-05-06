@@ -39,8 +39,6 @@ public partial class LoginViewModel : BaseViewModel
     private IAPIHelper _apiHelper;
     private readonly IMessenger _messenger;
 
-    //TODO - Wire up Login and Sign up functions
-
     public LoginViewModel(IAPIHelper apiHelper, IMessenger messenger)
     {
         IsErrorVisible = false;
