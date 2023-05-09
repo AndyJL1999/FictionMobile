@@ -36,7 +36,7 @@
                 <Label Text="Password" Margin="0,15,0,0" FontSize="Subtitle"/>
                 <Frame StyleClass="StartUpForm">
                     <Entry Placeholder="Password" VerticalOptions="Center" HorizontalOptions="FillAndExpand"
-                           Margin="20,0"
+                           Margin="20,0" IsPassword="True" Unfocused="Entry_Unfocused"
                            Text="{Binding Password}"/>
                 </Frame>
 
@@ -76,7 +76,7 @@
                 <Label Text="Password" Margin="0,15,0,0" FontSize="Subtitle"/>
                 <Frame StyleClass="StartUpForm">
                     <Entry Placeholder="Password" VerticalOptions="Center" HorizontalOptions="FillAndExpand"
-                           Margin="20,0" 
+                           Margin="20,0" IsPassword="True" Unfocused="Entry_Unfocused"
                            Text="{Binding Password}"/>
                 </Frame>
 

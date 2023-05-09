@@ -10,4 +10,10 @@ public partial class LoginView : ContentPage
 
 		BindingContext = viewModel;
 	}
+
+	private void Entry_Unfocused(object sender, FocusEventArgs e)
+	{
+        ((dynamic)this.BindingContext).Password = ((Entry)sender).Text;
+    }
+
 }
