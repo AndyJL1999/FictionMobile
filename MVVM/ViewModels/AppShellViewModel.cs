@@ -27,7 +27,7 @@ namespace FictionMobile.MVVM.ViewModels
         }
 
         [RelayCommand]
-        public void SelectChapter(string chapterTitle)
+        private void SelectChapter(string chapterTitle)
         {
             Shell.Current.FlyoutIsPresented = false;
 

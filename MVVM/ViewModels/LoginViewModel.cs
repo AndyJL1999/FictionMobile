@@ -114,7 +114,7 @@ public partial class LoginViewModel : BaseViewModel
     }
 
     [RelayCommand]
-    public async void Register()
+    private async void Register()
     {
         try
         {

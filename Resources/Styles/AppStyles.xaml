@@ -7,6 +7,22 @@
     <Color x:Key="MainColor">#301551</Color>
     <Color x:Key="SecondaryColor">#9742ff</Color>
 
+    <Style TargetType="SwipeView">
+        <Setter Property="VisualStateManager.VisualStateGroups">
+            <VisualStateGroupList>
+                <VisualStateGroup x:Name="CommonStates">
+                    <VisualState x:Name="Normal" />
+                    <VisualState x:Name="Selected">
+                        <VisualState.Setters>
+                            <Setter Property="BackgroundColor"
+                                        Value="Transparent" />
+                        </VisualState.Setters>
+                    </VisualState>
+                </VisualStateGroup>
+            </VisualStateGroupList>
+        </Setter>
+    </Style>
+
     <Style TargetType="Grid">
         <Setter Property="ColumnSpacing" Value="0" />
         <Setter Property="RowSpacing" Value="0" />

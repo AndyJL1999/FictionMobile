@@ -68,19 +68,19 @@ public partial class ReadingViewModel : BaseViewModel, IRecipient<SelectedChapte
     }
 
     [RelayCommand]
-    public void ScrollTop()
+    private void ScrollTop()
     {
         View.CollectionView.ScrollTo(0, -1, ScrollToPosition.Start, false);
     }
 
     [RelayCommand]
-    public void ScrollBottom()
+    private void ScrollBottom()
     {
         View.CollectionView.ScrollTo(1, -1, ScrollToPosition.End, true);
     }
 
     [RelayCommand]
-    public void OpenFontPopup()
+    private void OpenFontPopup()
     {
         var popup = new FontPopUp(this);
 
@@ -88,7 +88,7 @@ public partial class ReadingViewModel : BaseViewModel, IRecipient<SelectedChapte
     }
 
     [RelayCommand]
-    public void ChangeFont(FontPopUp popUp)
+    private void ChangeFont(FontPopUp popUp)
     {
         foreach(var chapter in ChapterList)
         {

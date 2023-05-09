@@ -47,6 +47,24 @@ public partial class HistoryViewModel : BaseViewModel, IRecipient<AddToHistoryMe
         });
     }
 
+    [RelayCommand]
+    private async void DeleteStory(int storyId)
+    {
+        try
+        {
+            await _storyEndpoint.RemoveFromUserStoryHistory(storyId);
+
+            var storyToRemove = StoriesRead.Where(s => s.Id == storyId).First();
+
+            StoriesRead.Remove(storyToRemove);
+        }
+        catch (Exception ex)
+        {
+            await Shell.Current.DisplayAlert("Error", ex.Message, "Ok");
+        }
+
+    }
+
     private async void FillHistory()
     {
         var payload = await _storyEndpoint.GetUserStoryHistory();

@@ -46,6 +46,24 @@ public partial class StoriesViewModel : BaseViewModel, IRecipient<AddToStoriesMe
         });
     }
 
+    [RelayCommand]
+    private async void DeleteStory(int storyId)
+    {
+        try
+        {
+            await _storyEndpoint.RemoveUserStory(storyId);
+
+            var storyToRemove = Stories.Where(s => s.Id == storyId).First();
+
+            Stories.Remove(storyToRemove);
+        }
+        catch(Exception ex)
+        {
+            await Shell.Current.DisplayAlert("Error", ex.Message, "Ok");
+        }
+        
+    }
+
     private async void FillStories()
     {
         IsBusy = true;

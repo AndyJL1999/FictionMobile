@@ -11,21 +11,37 @@
                         SelectionMode="Single">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <Frame BorderColor="AliceBlue" BackgroundColor="Transparent" MaximumHeightRequest="250">
-                        <Frame.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding Source={RelativeSource 
-                                                                    AncestorType={x:Type vm:StoriesViewModel}}, 
-                                                                    Path=GoToReadCommand}"
-                                                  CommandParameter="{Binding}"/>
-                        </Frame.GestureRecognizers>
+                    <SwipeView>
 
-                        <VerticalStackLayout Margin="5" VerticalOptions="Start">
-                            <Label Text="{Binding Title}" FontSize="Title" FontAttributes="Bold"/>
-                            <Label StyleClass="Header" Text="{Binding Author}"/>
-                            <Label MaxLines="7"
+                        <SwipeView.LeftItems>
+                            <SwipeItems>
+                                <SwipeItem Text="Delete"
+                                           IconImageSource="trash_icon.png"
+                                           BackgroundColor="Red"
+                                           Command="{Binding Source={RelativeSource 
+                                                             AncestorType={x:Type vm:StoriesViewModel}},
+                                                             Path=DeleteStoryCommand}"
+                                           CommandParameter="{Binding Id}"/>
+                            </SwipeItems>
+                        </SwipeView.LeftItems>
+
+                        <Frame BorderColor="AliceBlue" BackgroundColor="Transparent" MaximumHeightRequest="250">
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding Source={RelativeSource 
+                                                                        AncestorType={x:Type vm:StoriesViewModel}}, 
+                                                                        Path=GoToReadCommand}"
+                                                  CommandParameter="{Binding}"/>
+                            </Frame.GestureRecognizers>
+
+                            <VerticalStackLayout Margin="5" VerticalOptions="Start">
+                                <Label Text="{Binding Title}" FontSize="Title" FontAttributes="Bold"/>
+                                <Label StyleClass="Header" Text="{Binding Author}"/>
+                                <Label MaxLines="7"
                                    Text="{Binding Summary}"/>
-                        </VerticalStackLayout>
-                    </Frame>
+                            </VerticalStackLayout>
+                        </Frame>
+                    </SwipeView>
+                    
                 </DataTemplate>
             </CollectionView.ItemTemplate>
             
