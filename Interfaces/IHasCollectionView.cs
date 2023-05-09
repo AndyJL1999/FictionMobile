@@ -9,5 +9,6 @@ namespace FictionMobile.Interfaces
     public interface IHasCollectionView
     {
         public CarouselView CarouselView { get; }
+        public CollectionView CollectionView { get; }
     }
 }

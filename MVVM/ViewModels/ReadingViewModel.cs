@@ -32,6 +32,10 @@ public partial class ReadingViewModel : BaseViewModel, IRecipient<SelectedChapte
     private int _currentFontSize;
     [ObservableProperty]
     private int _selectedChapterIndex;
+    [ObservableProperty]
+    private bool _isUpVisible;
+    [ObservableProperty]
+    private bool _isDownVisible;
 
     private EpubBook _book;
 
@@ -61,6 +65,18 @@ public partial class ReadingViewModel : BaseViewModel, IRecipient<SelectedChapte
         CurrentFontSize = 16;
 
         _messenger.Register<SelectedChapterMessage>(this);
+    }
+
+    [RelayCommand]
+    public void ScrollTop()
+    {
+        View.CollectionView.ScrollTo(0, -1, ScrollToPosition.Start, false);
+    }
+
+    [RelayCommand]
+    public void ScrollBottom()
+    {
+        View.CollectionView.ScrollTo(1, -1, ScrollToPosition.End, true);
     }
 
     [RelayCommand]

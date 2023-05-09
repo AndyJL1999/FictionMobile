@@ -48,13 +48,6 @@
         <Setter Property="Margin" Value="15" />
     </Style>
 
-    <Shadow
-        x:Key="shadow"
-        Brush="{StaticResource SecondaryColor}"
-        Opacity="0.6"
-        Radius="15"
-        Offset="0,15" />
-
     <Style Class="BalanceRectangle" TargetType="RoundRectangle">
         <Setter Property="CornerRadius" Value="25" />
         <Setter Property="StrokeThickness" Value="2" />
@@ -106,50 +99,6 @@
     <Style Class="SmallFont" TargetType="Label">
         <Setter Property="FontFamily" Value="Regular" />
         <Setter Property="FontSize" Value="Small" />
-    </Style>
-
-    <Style Class="ListAmount" TargetType="Label">
-        <Setter Property="FontSize" Value="Medium" />
-        <Setter Property="HorizontalTextAlignment" Value="End" />
-        <Setter Property="VerticalOptions" Value="Center" />
-    </Style>
-
-    <EllipseGeometry
-        x:Key="circle"
-        Center="50,50"
-        RadiusX="30"
-        RadiusY="30" />
-
-    <Style Class="CircularButton" TargetType="Button">
-        <Setter Property="FontAttributes" Value="Bold" />
-        <Setter Property="FontSize" Value="Large" />
-        <Setter Property="HeightRequest" Value="100" />
-        <Setter Property="WidthRequest" Value="100" />
-        <Setter Property="Margin" Value="0,0,0,-35" />
-        <Setter Property="VerticalOptions" Value="End" />
-        <Setter Property="HorizontalOptions" Value="End" />
-        <Setter Property="BackgroundColor" Value="{StaticResource MainColor}" />
-        <Setter Property="Clip" Value="{StaticResource circle}" />
-    </Style>
-
-    <Style Class="NoDataText" TargetType="Label">
-        <Setter Property="HorizontalTextAlignment" Value="Center" />
-        <Setter Property="TextColor" Value="{StaticResource Black}" />
-        <Setter Property="VerticalOptions" Value="Center" />
-    </Style>
-
-    <Style
-        ApplyToDerivedTypes="True"
-        Class="RedControl"
-        TargetType="View">
-        <Setter Property="BackgroundColor" Value="DarkRed" />
-    </Style>
-
-    <Style
-        ApplyToDerivedTypes="True"
-        Class="PurpleControl"
-        TargetType="View">
-        <Setter Property="BackgroundColor" Value="Purple" />
     </Style>
 
 </ResourceDictionary>

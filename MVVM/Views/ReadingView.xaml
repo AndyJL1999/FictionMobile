@@ -24,15 +24,10 @@
 
         <CarouselView Grid.Row="1" ItemsSource="{Binding ChapterList}" Loop="False" 
                       Grid.ColumnSpan="2" BackgroundColor="#272537" x:Name="carouselView">
-            <CarouselView.ItemsLayout>
-                <LinearItemsLayout Orientation="Horizontal"
-                                   SnapPointsAlignment="Center"
-                                   SnapPointsType="MandatorySingle"/>
-            </CarouselView.ItemsLayout>
-            
+
             <CarouselView.ItemTemplate>
                 <DataTemplate>
-                    <CollectionView ItemsSource="{Binding}">
+                    <CollectionView ItemsSource="{Binding}" x:Name="collectionView" Scrolled="collectionView_Scrolled">
                         <CollectionView.ItemTemplate>
                             <DataTemplate>
                                 <WebView>
@@ -52,6 +47,48 @@
             </CarouselView.ItemTemplate>
 
         </CarouselView>
+
+        <!--#region Elemnts used for scrolling to Top and Bottom of page -->
+
+        <Grid VerticalOptions="End" HorizontalOptions="Start" IsVisible="{Binding IsDownVisible}"
+              BackgroundColor="Transparent" Margin="25,30" HeightRequest="50" WidthRequest="50" Grid.Row="1">
+
+            <RoundRectangle CornerRadius="30" Fill="Black" Opacity=".5">
+                <RoundRectangle.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding ScrollBottomCommand}"/>
+                </RoundRectangle.GestureRecognizers>
+            </RoundRectangle>
+
+            <Label Text="▼"
+                   BackgroundColor="Transparent"
+                   TextColor="White"
+                   Margin="0,2,1,0"
+                   FontAttributes="Bold"
+                   FontSize="Medium"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center"/>
+        </Grid>
+
+        <Grid VerticalOptions="End" HorizontalOptions="Start" IsVisible="{Binding IsUpVisible}"
+              BackgroundColor="Transparent" Margin="25,30" HeightRequest="50" WidthRequest="50" Grid.Row="1">
+
+            <RoundRectangle CornerRadius="30" Fill="Black" Opacity=".5">
+                <RoundRectangle.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding ScrollTopCommand}"/>
+                </RoundRectangle.GestureRecognizers>
+            </RoundRectangle>
+
+            <Label Text="▲"
+                   BackgroundColor="Transparent"
+                   TextColor="White"
+                   Margin="0,0,1,2"
+                   FontAttributes="Bold"
+                   FontSize="Medium"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center"/>
+        </Grid>
+
+        <!--#endregion-->
 
         <ActivityIndicator Grid.RowSpan="2"
                            Grid.ColumnSpan="2"
