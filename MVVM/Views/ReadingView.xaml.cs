@@ -32,20 +32,30 @@ public partial class ReadingView : ContentPage, IHasCollectionView
 
         var currentScrollPosition = e.VerticalOffset;
         var scrollDirection = currentScrollPosition.CompareTo(_lastScrollPosition);
-        if (scrollDirection == -1)
+
+
+        if (scrollDirection == -1 && (e.VerticalDelta > -0.534) == false)
         {
             // Scrolling up
             vm.IsDownVisible = false;
             vm.IsUpVisible = true;
 
         }
-        else if (scrollDirection == 1)
+        else if (scrollDirection == 1 && (e.VerticalDelta < 0.534) == false)
         {
             // Scrolling down
             vm.IsUpVisible = false;
             vm.IsDownVisible = true;
         }
 
+        if(e.VerticalDelta < 0.534 && e.VerticalDelta > -0.534)
+        {
+            // Stopped scrolling
+            vm.IsUpVisible = false;
+            vm.IsDownVisible = false;
+        }
+
+        Console.WriteLine(e.VerticalDelta);
         _lastScrollPosition = currentScrollPosition;
     }
 }
