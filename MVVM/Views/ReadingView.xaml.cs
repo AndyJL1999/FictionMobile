@@ -5,13 +5,16 @@ namespace FictionMobile.MVVM.Views;
 
 public partial class ReadingView : ContentPage, IHasCollectionView
 {
+    private ReadingViewModel _vm;
     private double _lastScrollPosition;
 
     public ReadingView(ReadingViewModel viewModel)
 	{
 		InitializeComponent();
 
-		BindingContext = viewModel;
+        _vm = viewModel;
+
+		BindingContext = _vm;
 	}
 
 	public CarouselView CarouselView => carouselView;
@@ -28,8 +31,6 @@ public partial class ReadingView : ContentPage, IHasCollectionView
 
     private void collectionView_Scrolled(object sender, ItemsViewScrolledEventArgs e)
     {
-        var vm = (ReadingViewModel)BindingContext;
-
         var currentScrollPosition = e.VerticalOffset;
         var scrollDirection = currentScrollPosition.CompareTo(_lastScrollPosition);
 
@@ -37,25 +38,24 @@ public partial class ReadingView : ContentPage, IHasCollectionView
         if (scrollDirection == -1 && (e.VerticalDelta > -0.534) == false)
         {
             // Scrolling up
-            vm.IsDownVisible = false;
-            vm.IsUpVisible = true;
+            _vm.IsDownVisible = false;
+            _vm.IsUpVisible = true;
 
         }
         else if (scrollDirection == 1 && (e.VerticalDelta < 0.534) == false)
         {
             // Scrolling down
-            vm.IsUpVisible = false;
-            vm.IsDownVisible = true;
+            _vm.IsUpVisible = false;
+            _vm.IsDownVisible = true;
         }
 
         if(e.VerticalDelta < 0.534 && e.VerticalDelta > -0.534)
         {
             // Stopped scrolling
-            vm.IsUpVisible = false;
-            vm.IsDownVisible = false;
+            _vm.IsUpVisible = false;
+            _vm.IsDownVisible = false;
         }
 
-        Console.WriteLine(e.VerticalDelta);
         _lastScrollPosition = currentScrollPosition;
     }
 }
