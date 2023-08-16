@@ -98,12 +98,6 @@
 		<EmbeddedResource Include="appSettings.json" />
 	</ItemGroup>
 
-	<ItemGroup>
-	  <Reference Include="FictionAPI">
-	    <HintPath>..\..\C# projects\FictionHoarder\FictionAPI\bin\Debug\net6.0-windows\FictionAPI.dll</HintPath>
-	  </Reference>
-	</ItemGroup>
-
 	<!-- Used for **DEBUG/TESTING** purposes **ONLY**-->
 	<PropertyGroup>
 		<AndroidHttpClientHandlerType>DangerousAndroidMessageHandler, DangerousAndroidMessageHandler</AndroidHttpClientHandlerType>
