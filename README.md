@@ -21,12 +21,12 @@ the fact that I have to connect to my IP address to use my phyiscal phone for te
 When designing my app I wanted it to have a similar design scheme to FictionHoarder so I used the same color as I did in my desktop app. Many of the
 views found in FictionHoarder can also be found in FictionMobile. All views are displayed on a singular page for the user to choose from.
 
-<img src="https://github.com/AndyJL1999/FictionMobile/assets/88408654/f6727456-b429-40a1-9102-7396762795c6" />
+![Image](Resources/Images/mobile_home_pic.png)
 
 There is of-course the LoginView that comes before anything else and it too is similar to it's desktop counterpart with two seperate forms on one page
 that handle registering and logging in. 
 
-<img src="https://github.com/AndyJL1999/FictionMobile/assets/88408654/261938fb-4700-450e-813d-e465d22c36e5" />
+![Image](Resources/Images/mobile_logIn_pic.png)
 
 I wanted this app to be easy to navigate and easy to understand which led to this simplistic flat design.
 
@@ -48,6 +48,4 @@ I set up for the app's use.
 I have this video on youtube: https://youtu.be/IN-M2XnLSeo. It demonstrates most of the apps functionality. I forgot to show the HistoryView
 but it shouldn't be too big a deal since it is very similar to the StoriesView. 
 
-https://github.com/AndyJL1999/FictionMobile/assets/88408654/dc25b119-0f23-4d85-8776-ccf6e7a0532c
-
-
+[![Watch the video](https://img.youtube.com/vi/IN-M2XnLSeo/0.jpg)](https://www.youtube.com/watch?v=IN-M2XnLSeo)
